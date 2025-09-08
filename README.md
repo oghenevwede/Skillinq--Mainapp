@@ -1,9 +1,24 @@
 # Skillinq--Mainapp
-The main app for the skillinq platform
+
+The main app for the Skillinq platform.
+
+---
+
+## Backend
+
+_This repository contains both the backend and frontend code for the Skillinq platform._
+
+- **Backend stack:** _[Add backend stack info here, e.g., Node.js, Express, etc.]_
+- **API documentation:** _[Add link or instructions if available]_
+- **Running the backend:** _[Add backend setup instructions if needed]_
+
+---
+
+## Frontend (Next.js)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+### Getting Started
 
 First, run the development server:
 
@@ -23,6 +38,8 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+---
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -31,6 +48,8 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+---
 
 ## Deploy on Vercel
 
