@@ -28,7 +28,7 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} className="flex-col bg-white p-8 max-w-sm rounded shadow-md">
       
       <div className="flex items-center justify-between">
-        <img src="/skillinq_logo.png" alt="Logo" className="h-8 mx-12 mb-5" />
+        <img src="/skillinq_logo.png" alt="Logo" className="h-8 mx-12gi mb-5" />
       </div>
 
         <h2 className="text-2xl font-bold mb-1">Log in to your account</h2>
