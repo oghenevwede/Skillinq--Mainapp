@@ -58,7 +58,7 @@ export default function LoginPage() {
         </button>
 
       <div className="align-center mt-4 flex justify-center">
-        <span className="text-xs font-normal mx-3">Don't have an account? <a href="/register" className="text-blue-800 hover:underline">Sign up</a></span>
+        <span className="text-xs font-normal mx-3">Don't have an account? <a href="/register/admin" className="text-blue-800 hover:underline">Sign up</a></span>
       </div>
 
       </form>

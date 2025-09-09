@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import ApplicantRegisterPage from "../continue-registration/page";
 
-export default function RegisterPage() {
+export default function AdminRegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
+    <ApplicantRegisterPage />
     e.preventDefault();
     setError("");
     try {
@@ -25,8 +27,8 @@ export default function RegisterPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="flex-col bg-white p-8 max-w-sm rounded shadow-md">
-      
+      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center bg-white w-2xl p-8 rounded shadow-md">
+      <div className="my-8">
       <div className="flex items-center justify-between mx-10 mb-5">
         <img src="/skillinq_logo.png" alt="Logo" className="h-8" />
       </div>
@@ -39,7 +41,7 @@ export default function RegisterPage() {
         <input
           type="email"
           placeholder="Enter your email"
-          className="mb-4 w-full max-w-xs p-2 border rounded"
+          className="mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
@@ -48,7 +50,7 @@ export default function RegisterPage() {
         <input
           type="password"
           placeholder="********"
-          className="mb-4 w-full max-w-xs p-2 border rounded"
+          className="mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required
@@ -60,7 +62,7 @@ export default function RegisterPage() {
       <div className="align-center mt-4 flex justify-center">
         <span className="text-xs font-normal mx-3">Already have an account? <a href="/login" className="text-blue-800 hover:underline">Sign in</a></span>
       </div>
-
+      </div>
       </form>
     </div>
   );
