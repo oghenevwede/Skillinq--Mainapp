@@ -33,17 +33,17 @@ export default function AdminRegisterPage() {
               <img src="/skillinq_logo.png" alt="Logo" className="h-8" />
             </div>
 
-            <h2 className="text-2xl font-bold mb-1 mx-4">Enter your OTP</h2>
-            <span className="mb-6 text-xs font-normal mx-9">Enter the OTP we sent to your email address</span>
+            <h2 className="text-2xl dark:text-black font-bold mb-1 mx-4">Enter your OTP</h2>
+            <span className="mb-6 text-xs dark:text-black font-normal mx-9">Enter the OTP we sent to your email address</span>
           </div>
           {error && <div className="mb-4 text-red-500">{error}</div>}
            
           <div>
-            <label htmlFor="otp" className="mb-2 mt-6 block font-normal text-xs">OTP</label>
+            <label htmlFor="otp" className="mb-2 mt-6 block font-normal dark:text-black text-xs">OTP</label>
             <input
               type="password"
               placeholder="****"
-              className="mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
+              className="dark:text-black mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
               value={OTP}
               onChange={e => setOTP(e.target.value)}
               required

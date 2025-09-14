@@ -33,24 +33,24 @@ export default function AdminRegisterPage() {
         <img src="/skillinq_logo.png" alt="Logo" className="h-8" />
       </div>
 
-        <h2 className="text-2xl font-bold mb-1 mx-4">Continue to Skillinq</h2>
-        <span className="mb-6 text-xs font-normal mx-9">Let's help you find your next role</span>
+        <h2 className="text-2xl dark:text-black font-bold mb-1 mx-4">Continue to Skillinq</h2>
+        <span className="mb-6 text-xs dark:text-black font-normal mx-9">Let's help you find your next role</span>
         {error && <div className="mb-4 text-red-500">{error}</div>}
 
-        <label htmlFor="email" className="mb-2 mt-6 block font-medium text-xs">Email</label>
+        <label htmlFor="email" className="mb-2 mt-6 block font-medium dark:text-black text-xs">Email</label>
         <input
           type="email"
           placeholder="Enter your email"
-          className="mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
+          className="dark:text-black mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
         />
-        <label htmlFor="password" className="mb-2 block font-medium text-xs">Password</label>
+        <label htmlFor="password" className="mb-2 block font-medium dark:text-black text-xs">Password</label>
         <input
           type="password"
           placeholder="********"
-          className="mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
+          className="dark:text-black mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required
@@ -60,7 +60,7 @@ export default function AdminRegisterPage() {
         </button>
 
       <div className="align-center mt-4 flex justify-center">
-        <span className="text-xs font-normal mx-3">Already have an account? <a href="/login" className="text-blue-800 hover:underline">Sign in</a></span>
+        <span className="text-xs dark:text-black font-normal mx-3">Already have an account? <a href="/login" className="text-blue-800 hover:underline">Sign in</a></span>
       </div>
       </div>
       </form>

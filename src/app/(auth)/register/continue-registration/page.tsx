@@ -153,7 +153,7 @@ export default function ApplicantRegisterPage() {
                 <button type="submit" className="w-2xl justify-center bg-blue-800 text-white py-2 rounded hover:bg-blue-700">
                     Verify your account
                 </button>
-                <span className="text-xs font-normal mx-3">Already have an account? <a href="/login" className="text-blue-800 hover:underline">Sign in</a></span>
+                <span className="text-xs dark:text-black font-normal mx-3">Already have an account? <a href="/login" className="text-blue-800 hover:underline">Sign in</a></span>
             </div>
         </form>
     </div>

@@ -31,24 +31,24 @@ export default function LoginPage() {
         <img src="/skillinq_logo.png" alt="Logo" className="h-8 mx-12gi mb-5" />
       </div>
 
-        <h2 className="text-2xl font-bold mb-1">Log in to your account</h2>
-        <span className="mb-6 text-xs font-normal mx-3">Welcome back! Please enter your details</span>
+        <h2 className="text-2xl dark:text-black font-bold mb-1">Log in to your account</h2>
+        <span className="mb-6 text-xs dark:text-black font-normal mx-3">Welcome back! Please enter your details</span>
         {error && <div className="mb-4 text-red-500">{error}</div>}
 
-        <label htmlFor="email" className="mb-2 mt-6 block font-medium text-xs">Email</label>
+        <label htmlFor="email" className="mb-2 mt-6 block font-medium text-xs dark:text-black">Email</label>
         <input
           type="email"
           placeholder="Enter your email"
-          className="mb-4 w-full max-w-xs p-2 border rounded"
+          className="dark:text-black mb-4 w-full max-w-xs p-2 border rounded"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
         />
-        <label htmlFor="password" className="mb-2 block font-medium text-xs">Password</label>
+        <label htmlFor="password" className="mb-2 block font-medium text-xs dark:text-black">Password</label>
         <input
           type="password"
           placeholder="********"
-          className="mb-4 w-full max-w-xs p-2 border rounded"
+          className="dark:text-black mb-4 w-full max-w-xs p-2 border rounded"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required
@@ -58,7 +58,7 @@ export default function LoginPage() {
         </button>
 
       <div className="align-center mt-4 flex justify-center">
-        <span className="text-xs font-normal mx-3">Don't have an account? <a href="/register/admin" className="text-blue-800 hover:underline">Sign up</a></span>
+        <span className="text-xs dark:text-black font-normal mx-3">Don't have an account? <a href="/register/admin" className="text-blue-800 hover:underline">Sign up</a></span>
       </div>
 
       </form>
