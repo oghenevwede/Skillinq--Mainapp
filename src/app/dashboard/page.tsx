@@ -58,15 +58,15 @@ const mockJobsData = [
 
 export default function DashboardPage() {
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="bg-white min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <Header />
       <main className="py-6 px-4 sm:px-8 md:px-20">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Welcome back, Andre Pinda</h1>
-            <p className="text-gray-600 dark:text-gray-400">Track your Job applications and discover more!</p>
+            <h1 className="text-3xl dark:text-black font-bold mb-2">Welcome back, Andre Pinda</h1>
+            <p className="text-gray-700 dark:text-gray-700">Track your Job applications and discover more!</p>
           </div>
-          <button className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg flex items-center hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-800 text-white font-medium py-2 px-4 rounded-lg flex items-center hover:bg-blue-700 transition-colors">
             <PlusIcon />
             Edit your resume
           </button>
@@ -99,9 +99,9 @@ export default function DashboardPage() {
 
         {/* Top Jobs Section */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Top Jobs for you this week</h2>
-          <Link href="#" className="text-blue-700 hover:underline transition-colors">
-          <button className='bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center hover:bg-blue-700 transition-colors'>
+          <h2 className="text-2xl text-black font-bold">Top Jobs for you this week</h2>
+          <Link href="#" className="text-blue-800 hover:underline transition-colors">
+          <button className='bg-blue-800 text-white font-medium py-2 px-4 rounded-lg flex items-center hover:bg-blue-700 transition-colors'>
             View all Jobs
           </button>
           </Link>

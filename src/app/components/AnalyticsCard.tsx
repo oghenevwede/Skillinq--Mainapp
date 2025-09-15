@@ -15,12 +15,12 @@ export default function AnalyticsCard({ title, value, change, trend, color }: An
   return (
     <div className={`bg-white rounded-2xl p-6 shadow-md border border-gray-200 relative ${color}`}>
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-gray-500 font-medium">{title}</h3>
+        <h3 className="dark:text-black font-medium">{title}</h3>
         <ThreeDotsIcon />
       </div>
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-4xl font-bold mb-2">{value}</h2>
+          <h2 className="text-4xl dark:text-black font-bold mb-2">{value}</h2>
           <span className={`text-sm flex items-center ${trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
             {trend === 'up' ? <UpArrowIcon /> : <DownArrowIcon />}
             {change} vs last month
