@@ -54,8 +54,6 @@ const mockJobsData = [
   },
 ];
 
-// Icons using inline SVG for simplicity. In a real app, you would use an icon library.
-
 export default function DashboardPage() {
   return (
     <div className="bg-white min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
