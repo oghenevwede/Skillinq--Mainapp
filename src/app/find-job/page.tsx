@@ -147,7 +147,7 @@ export default function FindJob() {
     <main className="flex-col flex py-6 px-4 mt-4 sm:px-8 md:px-20">
       <div className="flex items-center w-full justify-between mb-8">
         <div className='flex flex-col gap-4 w-full'>
-          <div className="bg-white dark:bg-gray-800 rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">  
+          <div className="bg-white rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200">  
             
             {/* Search by Title/Keyword */}
             <div className="flex items-center w-full lg:w-1/2 px-4 py-2">
@@ -155,7 +155,7 @@ export default function FindJob() {
               <input
               type="text"
               placeholder="Search by: Job title, Position, Keyword..."
-              className="flex-grow ml-2 outline-none text-lg text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400"
+              className="flex-grow ml-2 outline-none text-lg text-gray-800 bg-transparent placeholder-gray-400"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
               />
@@ -169,7 +169,7 @@ export default function FindJob() {
               <input 
               type="text" 
               placeholder="City, state or zip code" 
-              className="flex-grow ml-2 outline-none text-md text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400" 
+              className="flex-grow ml-2 outline-none text-md text-gray-800 bg-transparent placeholder-gray-400" 
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               />
@@ -178,7 +178,7 @@ export default function FindJob() {
             
             {/* Buttons */}
             <div className="flex items-center w-full lg:w-1/4 space-x-2">
-              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 dark:bg-gray-100 text-gray-700 dark:text-gray-700 font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-200 transition-colors">
                 <FilterIcon />
                 <span>Filters</span>
               </button>

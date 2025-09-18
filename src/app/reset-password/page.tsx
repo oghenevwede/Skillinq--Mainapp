@@ -1,10 +1,11 @@
 import React from 'react'
+import Image from 'next/image'
 
 export default function ResetPassword() {
   return (
   <div className="bg-white">
-    <div className="flex flex-col items-center justify-center mx-90  min-h-screen  gap-8">
-      <img src="/skillinq_logo.png" alt="Logo" className="h-8" />
+    <div className="flex flex-col items-center justify-center mx-90  min-h-screen gap-8 mt-30">
+      <Image src='/skillinq_logo.png' alt="Logo" width={180} height={180} />
       <div className="gap-3 flex flex-col items-center">
         <h2 className='text-3xl font-semibold'>Reset password</h2>
         <span className='text-justify text-md line-clamp-4'>
