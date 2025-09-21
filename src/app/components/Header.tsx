@@ -8,7 +8,7 @@ import SettingsIcon from './icons/SettingsIcon';
 import NotificationIcon from './icons/NotificationIcon';
 
 const Header = () => (
-  <header className="sticky top-0 left-0 z-0 flex items-center justify-between w-full py-4 px-10 bg-white border-b border-gray-300">
+  <header className="w-2xs min-w-screen flex-col sticky top-0 left-0 z-1  space-y-4 flex items-center justify-between py-4 px-10 bg-white border-b border-gray-300 md:w-full md:flex-row">
     <div className="flex items-center space-x-6">
       <div className="flex items-center pr-12">
         <Image src="/skillinq_logo.png" alt="Skillnq Logo" width={130} height={130} />
@@ -28,7 +28,7 @@ const Header = () => (
         <input 
         type="text" 
         placeholder="Search" 
-        className="w-xs pl-10 pr-4 py-2 rounded-md border-2 border-gray-300 dark:border-gray-600 bg-white text-md text-black focus:outline-none focus:ring-1 focus:ring-blue-500" 
+        className="w-full pl-10 pr-4 py-2 rounded-md border-2 border-gray-300 dark:border-gray-600 bg-white text-md text-black focus:outline-none focus:ring-1 focus:ring-blue-500" 
         />
       </div>
       <span className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
