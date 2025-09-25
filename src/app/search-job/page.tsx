@@ -42,7 +42,7 @@ export default function SearchJob() {
         <div className="flex items-center w-full justify-between mb-8">
           <div className='flex flex-col gap-4 w-full'>
             <h1 className="text-3xl dark:text-black mb-2">Explore Top Opportunities</h1>
-            <div className="bg-white dark:bg-gray-800 rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">
               {/* Search Input */}
               <div className="flex items-center w-full lg:w-1/2 px-4 py-2">
                 <SearchIcon />
@@ -56,7 +56,7 @@ export default function SearchJob() {
               </div>
               <Separator />
               <div className="flex items-center w-full lg:w-1/4 px-4 py-2">
-                <LocationIcon />
+                <LocationIcon className="size-6 stroke-gray-600" />
                 <input
                   type="text"
                   placeholder="City, state or zip code"
@@ -69,9 +69,9 @@ export default function SearchJob() {
               <div className="flex items-center w-full lg:w-1/4 space-x-2">
                 <button
                   onClick={() => dispatch(toggleFilters())}
-                  className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 text-black font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                 >
-                  <FilterIcon />
+                  <FilterIcon className="size-6 stroke-2 stroke-gray-800" />
                   <span>Filters</span>
                 </button>
                 <button
@@ -90,30 +90,30 @@ export default function SearchJob() {
         {showFilters && (
           <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-              <h2 className="text-xl font-bold mb-4">Filter Jobs</h2>
+              <h2 className="text-xl font-bold mb-4 text-black">Filter Jobs</h2>
               <div className="mb-4">
-                <label className="block mb-1 font-medium">Job Type</label>
+                <label className="block mb-1 font-medium text-black">Job Type</label>
                 <select
                   value={selectedType}
                   onChange={(e) => dispatch(setSelectedType(e.target.value))}
-                  className="w-full border border-gray-300 rounded p-2"
+                  className="w-full text-black border border-gray-300 rounded p-2"
                 >
-                  <option value="">Any</option>
+                  <option className="text-gray-500" value="">Any</option>
                   {jobTypes.map(type => (
-                    <option key={type} value={type}>{type}</option>
+                    <option className="text-black" key={type} value={type}>{type}</option>
                   ))}
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block mb-1 font-medium">Company</label>
+                <label className="block mb-1 font-medium text-black">Company</label>
                 <select
                   value={selectedCompany}
                   onChange={(e) => dispatch(setSelectedCompany(e.target.value))}
-                  className="w-full border border-gray-300 rounded p-2"
+                  className="w-full border text-black border-gray-300 rounded p-2"
                 >
-                  <option value="">Any</option>
+                  <option className="text-gray-500" value="">Any</option>
                   {companies.map(company => (
-                    <option key={company} value={company}>{company}</option>
+                    <option className="text-black" key={company} value={company}>{company}</option>
                   ))}
                 </select>
               </div>
