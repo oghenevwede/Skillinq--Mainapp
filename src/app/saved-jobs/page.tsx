@@ -76,7 +76,7 @@ export default function SearchJob() {
       <div className="flex items-center w-full justify-between mb-8">
         <div className='flex flex-col gap-4 w-full'>
           <h1 className="text-3xl dark:text-black font-bold mb-2">Explore Top Opportunities</h1>
-          <div className="bg-white dark:bg-gray-800 rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">  
+          <div className="bg-white rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200">  
             
             {/* Search by Title/Keyword */}
             <div className="flex items-center w-full lg:w-1/2 px-4 py-2">
@@ -84,7 +84,7 @@ export default function SearchJob() {
               <input
                 type="text"
                 placeholder="Search by: Job title, Position, Keyword..."
-                className="flex-grow ml-2 outline-none text-lg text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400"
+                className="flex-grow ml-2 outline-none text-lg text-gray-800 bg-transparent placeholder-gray-400"
                 value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
               />
@@ -94,7 +94,7 @@ export default function SearchJob() {
             
             {/* Location Input */}
             <div className="flex items-center w-full lg:w-1/4 px-4 py-2">
-              <LocationIcon />
+              <LocationIcon className='size-6 stroke-blue-800 dark:stroke-blue-800 stroke-2'/>
               <input 
               type="text" 
               placeholder="City, state or zip code" 
@@ -102,13 +102,13 @@ export default function SearchJob() {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               />
-              <CrosshairIcon />
+              <CrosshairIcon className='size-6 stroke-2 stroke-gray-400'/>
             </div>
             
             {/* Buttons */}
             <div className="flex items-center w-full lg:w-1/4 space-x-2">
               <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                <FilterIcon />
+                <FilterIcon className='size-6'/>        
                 <span>Filters</span>
               </button>
               <button 

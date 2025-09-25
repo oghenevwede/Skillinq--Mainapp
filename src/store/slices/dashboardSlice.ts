@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import profileSlice from '@/store/slices/profileSlice'
 
 type AnalyticsItem = {
   title: string;
@@ -31,6 +32,7 @@ const initialState: DashboardState = {
     { type: "FULL-TIME", title: "Senior UX Designer", salary: "Salary: $20,000 - $25,000", company: "Google Inc.", location: "Dhaka, Bangladesh" },
     { type: "INTERNSHIP", title: "Marketing Officer", salary: "Salary: $20,000 - $25,000", company: "Google Inc.", location: "Dhaka, Bangladesh" },
   ],
+  
 };
 
 export const dashboardSlice = createSlice({

@@ -165,7 +165,7 @@ export default function FindJob() {
             
             {/* Location Input */}
             <div className="flex items-center w-full lg:w-1/4 px-4 py-2">
-              <LocationIcon />
+              <LocationIcon className= 'size-6 stroke-2 stroke-blue-700'/>
               <input 
               type="text" 
               placeholder="City, state or zip code" 
@@ -173,17 +173,17 @@ export default function FindJob() {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               />
-              <CrosshairIcon />
+              <CrosshairIcon className='size-6 stroke-2 stroke-gray-400'/>
             </div>
             
             {/* Buttons */}
             <div className="flex items-center w-full lg:w-1/4 space-x-2">
-              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 dark:bg-gray-100 text-gray-700 dark:text-gray-700 font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-200 transition-colors">
-                <FilterIcon />
+              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-200 dark:bg-gray-200 text-gray-700 dark:text-gray-700 font-medium py-3 hover:bg-gray-100 dark:hover:bg-gray-1 00 transition-colors">
+                <FilterIcon className='size-6' />
                 <span>Filters</span>
               </button>
               <button 
-              className="flex-grow bg-blue-600 w-sm text-white font-medium py-3 rounded-sm p-4 hover:bg-blue-800 transition-colors"
+              className="flex-grow bg-blue-800 w-sm text-white font-medium py-3 rounded-sm p-4 hover:bg-blue-600 transition-colors"
               onClick={handleSearch}
               >
               Find Job

@@ -14,10 +14,10 @@ const Header = () => (
         <Image src="/skillinq_logo.png" alt="Skillnq Logo" width={130} height={130} />
       </div>
       <nav className="hidden lg:flex space-x-4 text-md font-medium fix">
-        <Link href="#" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Dashboard</Link>
-        <Link href="#" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Find Job</Link>
+        <Link href="/dashboard" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Dashboard</Link>
+        <Link href="/find-job" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Find Job</Link>
         <Link href="#" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Applications</Link>
-        <Link href="#" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Saved Jobs</Link>
+        <Link href="saved-jobs" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Saved Jobs</Link>
       </nav>
     </div>
     <div className="flex items-center space-x-4">

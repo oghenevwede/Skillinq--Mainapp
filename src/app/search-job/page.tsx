@@ -64,7 +64,7 @@ export default function SearchJob() {
                   value={location}
                   onChange={(e) => dispatch(setLocation(e.target.value))}
                 />
-                <CrosshairIcon />
+                <CrosshairIcon className='size-6 stroke-2 stroke-gray-500' />
               </div>
               <div className="flex items-center w-full lg:w-1/4 space-x-2">
                 <button
