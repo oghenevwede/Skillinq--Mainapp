@@ -16,7 +16,7 @@ const Header = () => (
       <nav className="hidden lg:flex space-x-4 text-md font-medium fix">
         <Link href="/dashboard" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Dashboard</Link>
         <Link href="/find-job" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Find Job</Link>
-        <Link href="#" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Applications</Link>
+        <Link href="/applied" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Applications</Link>
         <Link href="saved-jobs" className="py-2 px-4 rounded-lg text-black hover:text-blue-700 transition-colors">Saved Jobs</Link>
       </nav>
     </div>

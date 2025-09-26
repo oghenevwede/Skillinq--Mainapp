@@ -5,6 +5,7 @@ import dashboardReducer from "./slices/dashboardSlice";
 import jobSearchReducer from "./slices/jobSearchSlice"; // from your search-job page
 import authReducer from "./slices/authSlice";
 import jobReducer from "./slices/jobSlice";
+import jobsReducer from '@/store/slices/jobsSlice'
 import { profile } from "console";
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
     theme: themeReducer,
     auth: authReducer,
     job: jobReducer,
+    jobs: jobsReducer,
   },
 });
 

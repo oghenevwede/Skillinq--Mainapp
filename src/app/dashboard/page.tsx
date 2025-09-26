@@ -46,7 +46,7 @@ export default function DashboardPage() {
         {/* Top Jobs Section */}
         <div className="flex flex-col space-y-4 justify-between mb-6 md:items-center md:flex-row">
           <h2 className="text-2xl text-black font-bold">Top Jobs for you this week</h2>
-          <Link href="#">
+          <Link href="../search-job">
             <button className="bg-blue-800 text-white font-medium py-2 px-4 rounded-lg flex items-center hover:bg-blue-700 transition-colors">
               View all Jobs
             </button>

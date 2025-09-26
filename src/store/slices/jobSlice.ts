@@ -18,10 +18,12 @@ interface Job {
 
 interface JobState {
   selectedJob: Job | null;
+  applicationStep: 'initial' | 'confirm' | 'success';
 }
 
 const initialState: JobState = {
   selectedJob: null,
+  applicationStep: 'initial'
 };
 
 const jobSlice = createSlice({
@@ -31,11 +33,14 @@ const jobSlice = createSlice({
     setSelectedJob: (state, action: PayloadAction<Job>) => {
       state.selectedJob = action.payload;
     },
+    setApplicationStep: (state, action: PayloadAction<'initial' | 'confirm' | 'success'>) => {
+          state.applicationStep = action.payload;
+    },
     clearSelectedJob: (state) => {
       state.selectedJob = null;
     },
   },
 });
 
-export const { setSelectedJob, clearSelectedJob } = jobSlice.actions;
+export const { setApplicationStep, setSelectedJob, clearSelectedJob, } = jobSlice.actions;
 export default jobSlice.reducer;
