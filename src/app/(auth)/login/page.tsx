@@ -1,11 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { login } from "@/store/slices/authSlice";
 import { AppDispatch } from "@/store/store";
 import { useRouter } from "next/navigation";
+
+// Define the expected API response shape
+interface LoginResponse {
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
 
 export default function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,16 +23,16 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError(null);
     setLoading(true);
 
     try {
-      const res = await fetch("https://your-backend-api.com/login", {
+      const res = await fetch(process.env.NEXT_PUBLIC_API_URL || "https://your-backend-api.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -30,10 +40,8 @@ export default function LoginPage() {
 
       if (!res.ok) throw new Error("Login failed");
 
-      const data = await res.json();
+      const data: LoginResponse = await res.json(); // Typed response
 
-      // Assuming your API returns something like:
-      // { token: "...", user: { id, name, email } }
       dispatch(
         login({
           user: data.user,
@@ -42,8 +50,9 @@ export default function LoginPage() {
       );
 
       router.push("/dashboard"); // Redirect after login
-    } catch (err) {
-      setError("Invalid credentials");
+    } catch (error) {
+      // Use 'error' directly, no unused variable
+      setError(error instanceof Error ? error.message : "Invalid credentials");
     } finally {
       setLoading(false);
     }
@@ -55,13 +64,11 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center min-h-screen w-full bg-white mt-20 p-8 rounded shadow-md"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-6">
           <Image src="/skillinq_logo.png" alt="Logo" width={200} height={200} />
         </div>
 
-        <h2 className="text-2xl dark:text-black font-bold mb-1">
-          Log in to your account
-        </h2>
+        <h2 className="text-2xl dark:text-black font-bold mb-2">Log in to your account</h2>
         <span className="mb-6 text-xs dark:text-black font-normal mx-3">
           Welcome back! Please enter your details
         </span>
@@ -109,7 +116,7 @@ export default function LoginPage() {
 
         <div className="align-center mt-4 flex justify-center">
           <span className="text-xs dark:text-black font-normal mx-3">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a href="/register/admin" className="text-blue-800 hover:underline">
               Sign up
             </a>

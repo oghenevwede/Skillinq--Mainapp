@@ -21,15 +21,15 @@ const JobSearch = () => {
   const {
     jobTitle,
     location,
-    selectedType,
-    selectedCompany,
-    filteredJobs,
-    showFilters,
+    //selectedType,
+    //selectedCompany,
+    //filteredJobs,
+    //showFilters,
   } = useSelector((state: RootState) => state.jobSearch);
 
   // Unique job types and companies for filters
-  const jobTypes = Array.from(new Set(filteredJobs.map(job => job.type)));
-  const companies = Array.from(new Set(filteredJobs.map(job => job.company)));
+  //const jobTypes = Array.from(new Set(filteredJobs.map(job => job.type)));
+  //const companies = Array.from(new Set(filteredJobs.map(job => job.company)));
 
   return (
     <div className="bg-white rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">

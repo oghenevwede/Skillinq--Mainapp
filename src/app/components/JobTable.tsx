@@ -1,4 +1,12 @@
+"use client";
+
 import { useSelector } from 'react-redux';
+
+// Define the shape of the jobs state in Redux
+interface JobsState {
+  jobs: JobListItem[];
+  selectedTab: string;
+}
 
 interface JobListItem {
   company: string;
@@ -14,12 +22,15 @@ interface JobListItem {
 }
 
 export default function JobTable() {
-  const { jobs, selectedTab } = useSelector((state: any) => state.jobs);
+  // Type the Redux state properly
+  const { jobs, selectedTab } = useSelector((state: { jobs: JobsState }) => state.jobs);
 
-  // Simple filtering based on status (expand as needed)
-  const filteredJobs = selectedTab === 'All' 
-    ? jobs 
-    : jobs.filter((job: JobListItem) => job.status === selectedTab);
+  // Guard against undefined jobs and filter based on selectedTab
+  const filteredJobs = jobs && Array.isArray(jobs)
+    ? selectedTab === 'All'
+      ? jobs
+      : jobs.filter((job: JobListItem) => job.status === selectedTab)
+    : [];
 
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -54,9 +65,11 @@ export default function JobTable() {
               <td className="py-3 px-4">{job.closeDate}</td>
               <td className="py-3 px-4">
                 <div className="flex">
-                  {Array(5).fill(0).map((_, i) => (
-                    <span key={i} className={i < job.rating ? 'text-yellow-400 text-2xl' : 'text-gray-300 text-2xl'}>★</span>
-                  ))}
+                  {Array(5)
+                    .fill(0)
+                    .map((_, i) => (
+                      <span key={i} className={i < job.rating ? 'text-yellow-400 text-2xl' : 'text-gray-300 text-2xl'}>★</span>
+                    ))}
                 </div>
               </td>
               <td className="py-3 px-4">

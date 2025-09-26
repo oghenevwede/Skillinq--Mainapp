@@ -18,7 +18,7 @@ export default function DashboardPage() {
       <main className="py-6 px-4 sm:px-8 md:px-20">
         <div className="flex-col space-y-4 flex justify-between mb-8 md:items-center md:flex-row">
           <div>
-            <h1 className="text-3xl dark:text-black font-bold mb-2">Welcome back, Andre Pinda</h1>
+            <h1 className="text-3xl dark:text-black font-semibold mb-2">Welcome back, Andre Pinda</h1>
             <p className="text-gray-700 dark:text-gray-700">
               Track your Job applications and discover more!
             </p>

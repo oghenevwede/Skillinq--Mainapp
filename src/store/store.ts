@@ -6,7 +6,7 @@ import jobSearchReducer from "./slices/jobSearchSlice"; // from your search-job 
 import authReducer from "./slices/authSlice";
 import jobReducer from "./slices/jobSlice";
 import jobsReducer from '@/store/slices/jobsSlice'
-import { profile } from "console";
+//import { profile } from "console";
 
 export const store = configureStore({
   reducer: {

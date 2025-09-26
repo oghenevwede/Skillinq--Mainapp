@@ -1,22 +1,24 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Image from "next/image"; 
+import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { setSelectedJob, setApplicationStep } from "@/store/slices/jobSlice";
-import ArrowRightIcon from "../components/icons/ArrowRightIcon";
-import MailIcon from "../components/icons/MailIcon";
-import LinkIcon from "../components/icons/LinkIcon";
-import LinkedInIcon from "../components/icons/LinkedInIcon";
-import TwitterIcon from "../components/icons/TwitterIcon";
-import FacebookIcon from "../components/icons/FacebookIcon";
-import SquareStackIcon from "../components/icons/SquareStackIcon";
-import ClockIcon from "../components/icons/ClockIcon";
-import CalendarIcon from "../components/icons/CalendarIcon";
-import BriefcaseIcon from "../components/icons/BriefcaseIcon";
-import WalletIcon from "../components/icons/WalletIcon";
-import JobModal from "../components/JobModal"; // Import the new modal
+import ArrowRightIcon from "../../components/icons/ArrowRightIcon";
+import MailIcon from "../../components/icons/MailIcon";
+import LinkIcon from "../../components/icons/LinkIcon";
+import LinkedInIcon from "../../components/icons/LinkedInIcon";
+import TwitterIcon from "../../components/icons/TwitterIcon";
+import FacebookIcon from "../../components/icons/FacebookIcon";
+import SquareStackIcon from "../../components/icons/SquareStackIcon";
+import ClockIcon from "../../components/icons/ClockIcon";
+import CalendarIcon from "../../components/icons/CalendarIcon";
+import BriefcaseIcon from "../../components/icons/BriefcaseIcon";
+import WalletIcon from "../../components/icons/WalletIcon";
+import JobModal from "../../components/JobModal";
+import { useParams } from "next/navigation";
+import { MapIcon } from "@heroicons/react/24/outline";
 
 // Define the Job interface
 interface Job {
@@ -35,14 +37,18 @@ interface Job {
   requirements: string[];
 }
 
-export default function JobDetailsPage({ params }: { params: { id: string } }) {
+export default function JobDetailsPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { selectedJob } = useSelector((state: RootState) => state.job);
-  
+  const { id } = useParams() || {}; // Handle undefined params during initial render
+
   useEffect(() => {
-    // Simulate fetching job data based on params.id (replace with API call)
+    // Guard against undefined id
+    if (!id) return;
+
+    // Hardcoded job data (since no route.ts exists)
     const jobData: Job = {
-      id: params.id,
+      id: id as string,
       title: "Senior UX Designer",
       company: "Facebook",
       type: "FULL-TIME",
@@ -52,33 +58,36 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
       experience: "3+ years",
       education: "Graduation",
       postedDate: "14 Jun, 2024",
-      expiryDate: "14 Aug, 2024",
+      expiryDate: "14 Oct, 2025", // Updated to a future date
       description: [
         "Velstar is a Shopify Plus agency, and we partner with brands to help them grow, we also do the same with our people!",
         "Here at Velstar, we don't just make websites, we create exceptional digital experiences that consumers love. Our team of designers, developers, strategists, and creators work together to push brands to the next level. From Platform Migrations, User Experience & User Interface Design, to Digital Marketing, we have a proven track record in delivering outstanding eCommerce solutions and driving sales for our clients.",
         "The role will involve translating project specifications into clean, test-driven, easily maintainable code. You will work with the Project and Development teams as well as with the Technical Director, adhering closely to project plans and delivering work that meets functional & non-functional requirements. You will have the opportunity to create new, innovative, secure and scalable features for our clients on the Shopify platform.",
-        "Want to work with us? You're in good company!"
+        "Want to work with us? You're in good company!",
       ],
       requirements: [
         "Great troubleshooting and analytical skills combined with the desire to tackle challenges head-on",
         "3+ years of experience in back-end development working either with multiple smaller projects simultaneously or large-scale applications",
         "Experience with HTML, JavaScript, CSS, PHP, Symphony and/or Laravel",
         "Working regularly with APIs and Web Services (REST, GraphQL, SOAP, etc)",
-        "Have experience/awareness in Agile application development, commercial off-the-shelf software, middleware, servers and storage, and database management."
-      ]
+        "Have experience/awareness in Agile application development, commercial off-the-shelf software, middleware, servers and storage, and database management.",
+      ],
     };
     dispatch(setSelectedJob(jobData));
-  }, [dispatch, params.id]);
-  
+  }, [dispatch, id]);
+
   const handleApply = () => {
-    dispatch(setApplicationStep('confirm'));
+    dispatch(setApplicationStep("confirm"));
   };
-  
+
+  // Check if job is expired (optional enhancement)
+  const isExpired = selectedJob && new Date(selectedJob.expiryDate) < new Date();
   if (!selectedJob) return <p className="text-center text-gray-500">Loading job details...</p>;
-  
+  if (isExpired) return <p className="text-center text-red-500">This job has expired.</p>;
+
   return (
     <div className="bg-white min-h-screen text-gray-900 transition-colors duration-300">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-20">
           <div className="flex items-center mb-4 lg:mb-0">
@@ -98,7 +107,7 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
               </div>
             </div>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 w-sm">
             <button className="flex items-center justify-center gap-2 bg-black text-white w-1/2 px-4 py-3 rounded shadow-sm hover:bg-gray-800 transition-colors">
               <span>Save For Later</span>
               <ArrowRightIcon className="ml-2 h-4 w-4" />
@@ -112,7 +121,7 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
             </button>
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Column */}
@@ -130,22 +139,23 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
               </ul>
             </div>
           </div>
-          
+
           {/* Sidebar */}
           <div className="space-y-8">
-            <div className="flex flex-row items-center justify-center py-4 gap-12 bg-white border border-blue-50 rounded-lg">
+            <div className="flex flex-row items-center justify-center w-md py-4 gap-12 bg-white border border-blue-50 rounded-lg">
               <div className="items-center text-center p-4 border-r-2">
                 <h2 className="text-lg mb-2">Salary (USD)</h2>
                 <p className="text-lg font-semibold text-green-600">{selectedJob.salary}</p>
                 <p className="text-sm text-gray-400">Yearly</p>
               </div>
-              <div className="p-4">
+              <div className="p-4 items-center justify-center text-center">
+                <MapIcon className="size-10 stroke-blue-600"/>
                 <h2 className="text-lg font-semibold mb-2">Job Location</h2>
                 <p className="text-gray-400">Lagos, Nigeria</p>
               </div>
             </div>
-            
-            <div className="bg-white border border-blue-50 space-y-8 p-4 rounded-lg">
+
+            <div className="bg-white border border-blue-50 w-md space-y-8 p-4 rounded-lg">
               <h2 className="text-xl font-bold mb-4">Job Overview</h2>
               <div className="grid grid-cols-3 gap-4 text-xs">
                 <div>

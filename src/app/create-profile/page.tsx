@@ -1,13 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { setProfileData } from '@/store/slices/profileSlice';
 import Image from 'next/image';
 import { Header } from '../components/Header';
-import { CloudArrowUpIcon, CalendarIcon, MapPinIcon, BriefcaseIcon, StarIcon, LinkIcon, DocumentIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+import { CloudArrowUpIcon, CalendarIcon } from '@heroicons/react/24/outline';
 
 interface ProfileForm {
   fullName: string;
@@ -29,7 +28,7 @@ interface ProfileForm {
   github: string;
   twitter: string;
   other: string;
-  resume: File | null;
+  resume: File | string | null;
   skills: string[];
   highestEducation: string;
   openRelocation: string;
@@ -45,7 +44,7 @@ const openRelocationOptions = ['Yes', 'No', 'Prefer not to say'];
 const workStyleOptions = ['Remote', 'On-site', 'Hybrid'];
 const jobTypeOptions = ['Full-time', 'Part-time', 'Contract', 'Freelance'];
 const companySizeOptions = ['Startup (1-10)', 'Small (11-50)', 'Medium (51-200)', 'Large (201+)'];
-const educationOptions = ['High School', 'Bachelor\'s Degree', 'Master\'s Degree', 'PhD', 'Other'];
+const educationOptions = ['High School', 'Bachelor\'s Degree', 'Master\'s Degree', 'PhD', 'Other'].map((edu) => edu.replace('\'', '&apos;'));
 const genderOptions = ['Male', 'Female', 'Non-binary', 'Prefer not to say'];
 
 const CreateProfilePage: React.FC = () => {
@@ -93,9 +92,7 @@ const CreateProfilePage: React.FC = () => {
   const handleMultiSelectChange = (field: 'skills' | 'companySizes', option: string, checked: boolean) => {
     setForm((prev) => ({
       ...prev,
-      [field]: checked 
-        ? [...prev[field], option]
-        : prev[field].filter((item) => item !== option),
+      [field]: checked ? [...prev[field], option] : prev[field].filter((item) => item !== option),
     }));
     if (field === 'skills') {
       setSelectedSkills(checked ? [...selectedSkills, option] : selectedSkills.filter((item) => item !== option));
@@ -113,15 +110,11 @@ const CreateProfilePage: React.FC = () => {
           setAvatarPreview(reader.result as string);
           setForm((prev) => ({ ...prev, avatar: reader.result as string }));
         } else {
-          setResumePreview(reader.result as string); // Store base64 for preview
-          setForm((prev) => ({ ...prev, resume: file })); // Keep File object temporarily
+          setResumePreview(reader.result as string); // Set preview for resume
+          setForm((prev) => ({ ...prev, resume: file })); // Keep File object for API upload
         }
       };
-      if (type === 'avatar') {
-        reader.readAsDataURL(file);
-      } else {
-        reader.readAsDataURL(file); // Convert to base64 for state
-      }
+      reader.readAsDataURL(file);
     }
   };
 
@@ -129,29 +122,28 @@ const CreateProfilePage: React.FC = () => {
     setForm((prev) => ({ ...prev, dob: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Convert File to base64 before dispatching
     let resumeBase64: string | null = null;
     if (form.resume instanceof File) {
       const reader = new FileReader();
       reader.onloadend = () => {
         resumeBase64 = reader.result as string;
-        dispatch(setProfileData({ 
-          ...form, 
-          resume: resumeBase64, 
-          skills: selectedSkills, 
-          companySizes: selectedCompanySizes 
+        dispatch(setProfileData({
+          ...form,
+          resume: resumeBase64,
+          skills: selectedSkills,
+          companySizes: selectedCompanySizes,
         }));
         alert('Profile submitted successfully!');
       };
       reader.readAsDataURL(form.resume);
     } else {
-      dispatch(setProfileData({ 
-        ...form, 
-        resume: resumeBase64, 
-        skills: selectedSkills, 
-        companySizes: selectedCompanySizes 
+      dispatch(setProfileData({
+        ...form,
+        resume: resumeBase64,
+        skills: selectedSkills,
+        companySizes: selectedCompanySizes,
       }));
       alert('Profile submitted successfully!');
     }
@@ -163,7 +155,6 @@ const CreateProfilePage: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="flex items-start space-x-8">
-          {/* Main Content */}
           <div className="flex-1">
             <div className="">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Create a Profile</h1>
@@ -173,7 +164,6 @@ const CreateProfilePage: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="items-center justify-center space-y-8">
-              {/* Profile Photo Section */}
               <div className="flex flex-row gap-x-20 bg-white border-t-2 border-gray-200 p-6">
                 <div className="flex flex-col">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4">Profile Photo</h2>
@@ -206,8 +196,8 @@ const CreateProfilePage: React.FC = () => {
                             className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-blue-700 cursor-pointer"
                           >
                             <CloudArrowUpIcon className="size-8 mr-2 stroke-gray-500" />
+                            Upload photo
                           </label>
-                          <p className="text-xs">Upload photo</p>
                         </div>
                       )}
                     </div>
@@ -218,39 +208,25 @@ const CreateProfilePage: React.FC = () => {
                       accept="image/*"
                       onChange={(e) => handleFileChange(e, 'avatar')}
                       className="hidden"
-                      id="avatar-upload"
+                      id="avatar-upload-alternative"
                     />
                     <label
-                      htmlFor="avatar-upload"
+                      htmlFor="avatar-upload-alternative"
                       className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-blue-700 cursor-pointer"
                     >
                       <CloudArrowUpIcon className="size-8 mr-2" />
+                      <span className="text-blue-600">Click to replace</span>
                     </label>
-                    <span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleFileChange(e, 'avatar')}
-                        className="hidden"
-                        id="avatar-upload"
-                      />
-                      <label
-                      htmlFor="avatar-upload"
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-blue-700 cursor-pointer"
-                      >
-                      <span className='text-blue-600'>Click to replace</span>
-                      </label>
-                     <span>or drag and drop</span>
-                    </span>
+                    <span>or drag and drop</span>
                     <p className="text-sm text-gray-500">SVG, PNG, JPG or GIF (max. 400x400)</p>
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2  bg-white border-t-2 border-gray-200 p-6">
+              <div className="grid grid-cols-2 bg-white border-t-2 border-gray-200 p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">Personal Details</h2>
                 <div className="grid grid-cols-2 md:grid-cols-2 gap-x-12 gap-y-8">
-                  <div className='col-span-2'>
+                  <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
                     <input
                       type="text"
@@ -320,26 +296,10 @@ const CreateProfilePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Location & Experience Section */}
               <div className="grid grid-cols-2 bg-white p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">Location & Experience</h2>
                 <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
-                  <div className='col-span-2'>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Primary Role *</label>
-                    <select
-                      name="primaryRole"
-                      value={form.primaryRole}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-500"
-                    >
-                      <option value="">Select</option>
-                      {rolesOptions.map((role) => (
-                        <option key={role} value={role}>{role}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
+                  <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Primary Role *</label>
                     <select
                       name="primaryRole"
@@ -370,10 +330,8 @@ const CreateProfilePage: React.FC = () => {
                     </select>
                   </div>
                   <div className="md:col-span-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">More roles you are open to (Select up to 5) *</label>  
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Highest level of education *</label>
                     <select
-                      id=''
                       name="highestEducation"
                       value={form.highestEducation}
                       onChange={handleInputChange}
@@ -387,19 +345,17 @@ const CreateProfilePage: React.FC = () => {
                     </select>
                   </div>
                 </div>
-                </div>
               </div>
 
-              {/* Current Place of Employment Section */}
               <div className="grid grid-cols-2 bg-white p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">Current Place of Employment</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className='col-span-2'>
+                  <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Where are you currently working? *</label>
                     <input
                       type="text"
-                      name="currentCompany"
-                      value={form.currentCompany}
+                      name="currentLocation"
+                      value={form.currentLocation}
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-500"
@@ -450,8 +406,7 @@ const CreateProfilePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Add a Bio Section */}
-              <div className="grid grid-cols-2 bg-white p-6 ">
+              <div className="grid grid-cols-2 bg-white p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">Add a Bio</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -468,68 +423,68 @@ const CreateProfilePage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 space-y-4">
-                    <h3 className="font-medium text-gray-900">Where can people find you online?</h3>
-                    <div className='grid grid-cols-1 gap-10'>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Website or Portfolio</label>
-                      <input
-                        type="url"
-                        name="website"
-                        value={form.website}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="https://"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
-                      <input
-                        type="url"
-                        name="linkedin"
-                        value={form.linkedin}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="https://linkedin.com/in/"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">GitHub</label>
-                      <input
-                        type="url"
-                        name="github"
-                        value={form.github}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="https://github.com/"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Twitter</label>
-                      <input
-                        type="url"
-                        name="twitter"
-                        value={form.twitter}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="https://twitter.com/"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Other</label>
-                      <input
-                        type="url"
-                        name="other"
-                        value={form.other}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="https://"
-                      />
-                    </div>
-                    </div>
-                  </div>
 
-              {/* Resume Upload Section */}
+              <div className="grid grid-cols-2 space-y-4">
+                <h3 className="font-medium text-gray-900">Where can people find you online?</h3>
+                <div className="grid grid-cols-1 gap-10">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Website or Portfolio</label>
+                    <input
+                      type="url"
+                      name="website"
+                      value={form.website}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="https://"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                    <input
+                      type="url"
+                      name="linkedin"
+                      value={form.linkedin}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="https://linkedin.com/in/"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">GitHub</label>
+                    <input
+                      type="url"
+                      name="github"
+                      value={form.github}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="https://github.com/"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Twitter</label>
+                    <input
+                      type="url"
+                      name="twitter"
+                      value={form.twitter}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="https://twitter.com/"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Other</label>
+                    <input
+                      type="url"
+                      name="other"
+                      value={form.other}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="https://"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 bg-white p-6">
                 <div className="">
                   <p className="text-lg font-semibold text-black b-4">
@@ -552,10 +507,16 @@ const CreateProfilePage: React.FC = () => {
                     <p className="text-sm text-gray-900 mb-1">Click to upload your CV or drag & drop files here</p>
                     <p className="text-xs text-gray-500">PDF, SVG, PNG, JPG or GIF</p>
                   </div>
+                  {resumePreview && (
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-700">Preview: <span className="font-medium">{resumePreview.substring(0, 30)}...</span></p>
+                      {/* For image-based resumes (e.g., PDF thumbnails or images), you could use: */}
+                      {/* <Image src={resumePreview} alt="Resume Preview" width={100} height={100} className="mt-2" /> */}
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Your Skills & Tools Section */}
               <div className="grid grid-cols-2 bg-white p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">Your Skills & Tools</h2>
                 <div className="relative w-xl">
@@ -577,25 +538,9 @@ const CreateProfilePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Location & Experience (Education etc.) Section */}
               <div className="grid grid-cols-2 bg-white p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">Location & Experience</h2>
                 <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Highest level of education *</label>
-                    <select
-                      name="highestEducation"
-                      value={form.highestEducation}
-                      onChange={handleInputChange}
-                      required
-                      className="w-xl px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                      <option value="">Select an option</option>
-                      {educationOptions.map((edu) => (
-                        <option key={edu} value={edu}>{edu}</option>
-                      ))}
-                    </select>
-                  </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Are you open to relocation? *</label>
                     <select
@@ -618,7 +563,7 @@ const CreateProfilePage: React.FC = () => {
                       value={form.workStyle}
                       onChange={handleInputChange}
                       required
-                      className="w-xl px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-xl px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="">Select an option</option>
                       {workStyleOptions.map((option) => (
@@ -650,7 +595,7 @@ const CreateProfilePage: React.FC = () => {
                           <input
                             type="checkbox"
                             checked={selectedCompanySizes.includes(size)}
-                            onChange={(e) => handleMultiSelectChange('companySizes' as any, size, e.target.checked)}
+                            onChange={(e) => handleMultiSelectChange('companySizes', size, e.target.checked)}
                             className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                           />
                           <span className="ml-2 text-sm text-gray-700">{size}</span>
@@ -661,7 +606,6 @@ const CreateProfilePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Submit Button */}
               <div className="pt-6">
                 <button
                   type="submit"
@@ -673,9 +617,9 @@ const CreateProfilePage: React.FC = () => {
             </form>
           </div>
 
-          {/* Sidebar - Dots */}
-          {/*<div className="hidden md:block w-16 lg:flex flex-col space-y-4">
-            {[1,2,3].map((step) => (
+          {/* Sidebar - Dots (commented out) */}
+          {/* <div className="hidden md:block w-16 lg:flex flex-col space-y-4">
+            {[1, 2, 3].map((step) => (
               <div key={step} className="flex-1 flex items-center justify-center">
                 <div className={`w-2 h-2 rounded-full ${step === 1 ? 'bg-blue-600' : 'bg-gray-300'}`} />
               </div>
