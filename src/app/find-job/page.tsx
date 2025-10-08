@@ -420,7 +420,7 @@ export default function FindJob() {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               />
-              <CrosshairIcon />
+              <CrosshairIcon className='size-6 stroke-gray-700' />
             </div>
             
             {/* Buttons */}

@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 export default function ResetPassword() {
   return (
-  <div className="bg-white">
-    <div className="flex flex-col items-center justify-center mx-90  min-h-screen gap-8 mt-30">
+  <div className="bg-white min-h-screen">
+    <div className="flex flex-col items-center justify-center mx-90 gap-8 mt-30">
       <Image src='/skillinq_logo.png' alt="Logo" width={180} height={180} />
       <div className="gap-3 flex flex-col items-center">
         <h2 className='text-3xl font-semibold'>Reset password</h2>
@@ -12,7 +12,7 @@ export default function ResetPassword() {
           Please input the OTP we just sent to you.
         </span>
       </div>
-      <form className="flex flex-col gap-1 w-full max-w-sm">
+      <form className="flex flex-col tigap-1 w-full max-w-sm">
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="font-medium">Email</label>
           <input
@@ -61,8 +61,8 @@ export default function ResetPassword() {
           Reset Password
         </button>
       </form>
+      </div>
     </div>
-  </div>
   )
   
 }

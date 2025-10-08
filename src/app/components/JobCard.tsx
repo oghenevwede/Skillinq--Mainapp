@@ -21,9 +21,13 @@ const JobCard = ({ type, title, salary, company, location }: JobCardProps) => (
       </div>
     </div>
     <div className="inline-flex space-x-2 items-center text-sm text-gray-500">
-      <div className="flex items-center">
-        <Image src="/google-g.svg" alt={`.`} width={24} height={24} className="mr-2" />
+      <Image src="/google-g.svg" alt={`.`} width={24} height={24} className="mr-2" />
+      <div className="flex flex-col">
         <p className="text-md">{company}</p>
+        <div className="flex">
+          <LocationIcon className='size-5 stroke-2 stroke-gray-600' />
+          {location}
+        </div>
       </div>
       <span className="ml-1">
         <LocationIcon className='size-6 stroke-gray-600' />

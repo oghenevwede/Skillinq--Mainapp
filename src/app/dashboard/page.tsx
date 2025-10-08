@@ -191,7 +191,7 @@ export default function DashboardPage() {
         <div className="flex items-center w-full justify-between mb-8 mt-8">
           <div className='flex flex-col gap-4 w-full'>
             <h1 className="text-3xl dark:text-black mb-2">Explore Top Opportunities</h1>
-            <div className="bg-white dark:bg-gray-800 rounded-sm shadow p-2.5  mb-4 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">  
+            <div className="bg-white dark:bg-gray-800 rounded-sm shadow p-2.5 mb-4 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">  
               {/* Search by Title/Keyword */}
               <div className="flex items-center w-full lg:w-1/2 px-4 py-2">
                 <SearchIcon />
@@ -214,7 +214,7 @@ export default function DashboardPage() {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 />
-                <CrosshairIcon />
+                <CrosshairIcon className='size-6 stroke-gray-700'/>
               </div>
               {/* Buttons */}
               <div className="flex items-center w-full lg:w-1/4 space-x-2">

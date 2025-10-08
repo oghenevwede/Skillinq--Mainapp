@@ -9,11 +9,14 @@ const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError(null);
+    setLoading(true);
+
     try {
       /*const res = await fetch("https://your-backend-api.com/login", {
         method: "POST",
@@ -47,22 +50,32 @@ const router = useRouter();
             placeholder="Enter your email"
             className="dark:text-black mb-4 min-w-full p-2 border-2 rounded"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label htmlFor="password" className="mb-2 block font-medium text-md dark:text-black">Password</label>
+          <label
+            htmlFor="password"
+            className="mb-2 block font-medium text-md dark:text-black"
+          >
+            Password
+          </label>
           <input
             type="password"
             placeholder="********"
             className="dark:text-black mb-4 w-full p-2 border-2 rounded"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-          </div>
-          <button type="submit" className="w-full max-w-xs justify-center bg-blue-800 text-white py-2 rounded hover:bg-blue-700">
-            Sign in
-          </button>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full max-w-xs justify-center bg-blue-800 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+        >
+          {loading ? "Signing in..." : "Sign in"}
+        </button>
 
           <div className="align-center mt-4 flex justify-center">
             <span className="text-xs dark:text-black font-normal mx-3">Don't have an account? <a href="/register" className="text-blue-800 hover:underline">Sign up</a></span>

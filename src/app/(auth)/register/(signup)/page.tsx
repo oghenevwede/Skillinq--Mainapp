@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ApplicantRegisterPage from "../continue-registration/page";
@@ -10,12 +10,12 @@ export default function AdminRegisterPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    <ApplicantRegisterPage />
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError(null);
+
     try {
       /*const res = await fetch("https://your-backend-api.com/login", {
         method: "POST",
@@ -29,7 +29,7 @@ export default function AdminRegisterPage() {
       setError("Invalid credentials");
     }
   };
-  
+
   return (
   <div className="flex items-center justify-center bg-gray-100 mt-20">
     <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center min-h-screen w-full bg-white p-8 rounded shadow-md">

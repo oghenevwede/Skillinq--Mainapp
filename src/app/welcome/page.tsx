@@ -9,19 +9,19 @@ export default function WelcomePage() {
             <Image src={'./next.svg'} width={200} height={200} alt='Picture'></Image>
             <h2 className='text-3xl font-semibold'>Nice to meet you, Andre</h2>
             <span className='text-justify text-xl line-clamp-4'>
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
-                I'm Zainab, and the Skillinq team is happy to have you onboard! 
+                I&apos;m Zainab, and the Skillinq team is happy to have you onboard! 
                 However to proceed we will need a few more information
             </span>
             <Buttons 
