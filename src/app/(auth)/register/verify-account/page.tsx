@@ -2,22 +2,45 @@
 
 import React, { useState } from "react";
 import ApplicantRegisterPage from "../continue-registration/page";
+import { useRouter } from "next/navigation";
 
 export default function AdminRegisterPage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false)
+
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
+  
+
+  const finalizeAccountCreation = (): Promise<void> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        <div className="">
+          <h1>Setup complete</h1>
+        </div>; resolve();
+      }, 5000)
+    });
+  };
+
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     <ApplicantRegisterPage />
     e.preventDefault();
     setError("");
+    setIsLoading(true)
     try {
-      const res = await fetch("https://your-backend-api.com/login", {
+      /*const res = await fetch("https://your-backend-api.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ OTP }),
-      });
-      if (!res.ok) throw new Error("Login failed");
+      });*/ 
+      //if (!res.ok) throw new Error("Login failed");
+      //router.push ('/almost-done')
+      await router.push ('/almost-done');
+      await finalizeAccountCreation();
+      await router.replace('/dashboard')
       // Handle successful login (e.g., save token, redirect)
     } catch (err) {
       setError("Invalid credentials");

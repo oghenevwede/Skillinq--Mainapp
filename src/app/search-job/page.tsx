@@ -152,7 +152,7 @@ export default function SearchJob() {
               <Separator />
               {/* Location Input */}
               <div className="flex items-center w-full lg:w-1/4 px-4 py-2">
-                <LocationIcon />
+                <LocationIcon className='size-6 stroke-gray-600' />
                 <input 
                   type="text" 
                   placeholder="City, state or zip code" 

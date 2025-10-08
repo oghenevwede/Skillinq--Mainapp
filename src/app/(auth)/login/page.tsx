@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,12 +15,14 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("https://your-backend-api.com/login", {
+      /*const res = await fetch("https://your-backend-api.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) throw new Error("Login failed");
+      });*/
+
+      // if (!res.ok) throw new Error("Login failed");
+      router.push ('./dashboard')
       // Handle successful login (e.g., save token, redirect)
     } catch (err) {
       setError("Invalid credentials");
@@ -27,20 +32,20 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen w-full bg-white">
       <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center min-h-screen w-full bg-white mt-20 p-8 rounded shadow-md">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-6">
           <Image src='/skillinq_logo.png' alt="Logo" width={200} height={200}/>
         </div>
 
-          <h2 className="text-2xl dark:text-black font-bold mb-1">Log in to your account</h2>
-          <span className="mb-6 text-xs dark:text-black font-normal mx-3">Welcome back! Please enter your details</span>
+          <h2 className="text-3xl dark:text-black font-semibold mb-2">Log in to your account</h2>
+          <span className="mb-6 text-md dark:text-black font-normal mx-3">Welcome back! Please enter your details.</span>
           {error && <div className="mb-4 text-red-500">{error}</div>}
 
-          <div className="flex flex-col mb-4 gap-3 max-w-xs w-full">
+          <div className="flex flex-col mb-4 max-w-xs w-full">
           <label htmlFor="email" className="mb-2 mt-6 block font-medium text-md dark:text-black">Email</label>
           <input
             type="email"
             placeholder="Enter your email"
-            className="dark:text-black mb-4 min-w-full p-2 border rounded"
+            className="dark:text-black mb-4 min-w-full p-2 border-2 rounded"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
@@ -49,7 +54,7 @@ export default function LoginPage() {
           <input
             type="password"
             placeholder="********"
-            className="dark:text-black mb-4 w-full p-2 border rounded"
+            className="dark:text-black mb-4 w-full p-2 border-2 rounded"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
@@ -60,7 +65,7 @@ export default function LoginPage() {
           </button>
 
           <div className="align-center mt-4 flex justify-center">
-            <span className="text-xs dark:text-black font-normal mx-3">Don't have an account? <a href="/register/admin" className="text-blue-800 hover:underline">Sign up</a></span>
+            <span className="text-xs dark:text-black font-normal mx-3">Don't have an account? <a href="/register" className="text-blue-800 hover:underline">Sign up</a></span>
           </div>
 
         </form>

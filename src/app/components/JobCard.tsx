@@ -26,7 +26,7 @@ const JobCard = ({ type, title, salary, company, location }: JobCardProps) => (
         <p className="text-md">{company}</p>
       </div>
       <span className="ml-1">
-        <LocationIcon />
+        <LocationIcon className='size-6 stroke-gray-600' />
       </span>
       {location}
       <BookmarkIcon />

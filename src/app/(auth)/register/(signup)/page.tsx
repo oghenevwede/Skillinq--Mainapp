@@ -2,9 +2,12 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import ApplicantRegisterPage from "../continue-registration/page";
 
 export default function AdminRegisterPage() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,12 +17,13 @@ export default function AdminRegisterPage() {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("https://your-backend-api.com/login", {
+      /*const res = await fetch("https://your-backend-api.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) throw new Error("Login failed");
+      });*/
+     // if (!res.ok) throw new Error("Login failed");
+     router.push ('/register/continue-registration')
       // Handle successful login (e.g., save token, redirect)
     } catch (err) {
       setError("Invalid credentials");
@@ -30,13 +34,13 @@ export default function AdminRegisterPage() {
   <div className="flex items-center justify-center bg-gray-100 mt-20">
     <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center min-h-screen w-full bg-white p-8 rounded shadow-md">
       <div className="flex flex-col items-center my-8 gap-4">
-        <div className="flex items-center justify-between mx-10 mb-5">
+        <div className="flex items-center justify-between mx-10 mb-6">
           <Image src={'/skillinq_logo.png'} alt="Logo" width={200} height={200} />
         </div>
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center">
-            <h2 className="text-3xl dark:text-black font-bold mb-1 mx-4">Continue to Skillinq</h2>
-            <span className="mb-6 text-lg dark:text-black font-normal mx-9">Let's help you find your next role</span>
+            <h2 className="text-3xl dark:text-black font-semibold mb-1 mx-4">Continue to Skillinq</h2>
+            <span className="mb-6 text-md dark:text-black font-normal mx-9">Let's help you find your next role</span>
             {error && <div className="mb-4 text-red-500">{error}</div>}
           </div>
           
@@ -46,7 +50,7 @@ export default function AdminRegisterPage() {
               <input
               type="email"
               placeholder="Enter your email"
-              className="dark:text-black mb-4 w-lg max-w-xs p-2 border border-gray-400 rounded"
+              className="dark:text-black mb-4 w-lg max-w-xs p-2 border-2 border-gray-400 rounded"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -57,7 +61,7 @@ export default function AdminRegisterPage() {
               <input
               type="password"
               placeholder="********"
-              className="dark:text-black mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
+              className="dark:text-black mb-4 w-full max-w-xs p-2 border-2 border-gray-400 rounded"
               value={password}
               onChange={e => setPassword(e.target.value)}
               required

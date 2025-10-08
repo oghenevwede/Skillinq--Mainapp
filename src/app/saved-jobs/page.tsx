@@ -76,7 +76,7 @@ export default function SearchJob() {
       <div className="flex items-center w-full justify-between mb-8">
         <div className='flex flex-col gap-4 w-full'>
           <h1 className="text-3xl dark:text-black font-bold mb-2">Explore Top Opportunities</h1>
-          <div className="bg-white dark:bg-gray-800 rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">  
+          <div className="bg-white rounded-sm shadow p-2.5 flex flex-col lg:flex-row items-center justify-between max-w-full mx-auto space-y-2 lg:space-y-0 lg:space-x-4 border border-gray-200 dark:border-gray-700">  
             
             {/* Search by Title/Keyword */}
             <div className="flex items-center w-full lg:w-1/2 px-4 py-2">
@@ -94,7 +94,7 @@ export default function SearchJob() {
             
             {/* Location Input */}
             <div className="flex items-center w-full lg:w-1/4 px-4 py-2">
-              <LocationIcon />
+              <LocationIcon className='size-6 stroke-gray-600'/>
               <input 
               type="text" 
               placeholder="City, state or zip code" 
@@ -107,7 +107,7 @@ export default function SearchJob() {
             
             {/* Buttons */}
             <div className="flex items-center w-full lg:w-1/4 space-x-2">
-              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 text-gray-700 font-medium py-3 hover:bg-gray-200 transition-colors">
                 <FilterIcon />
                 <span>Filters</span>
               </button>
