@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import ThemeToggleButton from "../../../components/ThemeToggle";
+//import ThemeToggleButton from "../../../components/ThemeToggle";
 
 export default function ApplicantRegisterPage() {
     const router = useRouter(); 
@@ -29,7 +29,7 @@ export default function ApplicantRegisterPage() {
             //if (!res.ok) throw new Error("Login failed");
             router.push ('/register/verify-account')
             // Handle successful login (e.g., save token, redirect)
-        } catch (err) {
+        } catch (_err) {
             setError("Invalid credentials");
         }
     };

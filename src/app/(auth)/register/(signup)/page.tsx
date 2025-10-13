@@ -3,7 +3,7 @@
 import React, { useState, FormEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import ApplicantRegisterPage from "../continue-registration/page";
+//import ApplicantRegisterPage from "../continue-registration/page";
 
 export default function AdminRegisterPage() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function AdminRegisterPage() {
      // if (!res.ok) throw new Error("Login failed");
      router.push ('/register/continue-registration')
       // Handle successful login (e.g., save token, redirect)
-    } catch (err) {
+    } catch (_err) {
       setError("Invalid credentials");
     }
   };

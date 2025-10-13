@@ -240,13 +240,13 @@ export default function DashboardPage() {
     {showFilters && (
       <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
         <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-          <h2 className="text-xl font-bold mb-4">Filter Jobs</h2>
+          <h2 className="text-xl font-bold mb-4 text-black">Filter Jobs</h2>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Job Type</label>
+            <label className="block mb-1 font-medium text-black">Job Type</label>
             <select
             value={selectedType}
             onChange={e => setSelectedType(e.target.value)}
-            className="w-full border border-gray-300 rounded p-2"
+            className="w-full border border-gray-300 text-gray-700 rounded p-2"
             >
             <option value="">Any</option>
             {jobTypes.map(type => (
@@ -255,11 +255,11 @@ export default function DashboardPage() {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Company</label>
+            <label className="block mb-1 font-medium text-black">Company</label>
             <select
             value={selectedCompany}
             onChange={e => setSelectedCompany(e.target.value)}
-            className="w-full border border-gray-300 rounded p-2"
+            className="w-full border border-gray-300 text-gray-700 rounded p-2"
             >
             <option value="">Any</option>
             {companies.map(company => (

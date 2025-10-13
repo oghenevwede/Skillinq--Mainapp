@@ -29,7 +29,7 @@ interface JobData {
 }
 
 // Mock data (analytics unused, jobs used)
-const mockAnalyticsData: AnalyticsData[] = [
+{/*const mockAnalyticsData: AnalyticsData[] = [
   { title: "Total Jobs Applied", value: "2,420", change: "40%", trend: "up" },
   { title: "Total Jobs Accepted", value: "1,210", change: "10%", trend: "down" },
   { title: "Total Jobs Rejected", value: "316", change: "20%", trend: "up" },
@@ -57,7 +57,7 @@ const mockJobsData: JobData[] = [
     company: "Google Inc.",
     location: "Dhaka, Bangladesh",
   },
-];
+]; */}
 
 export default function SearchJob() {
   const [location, setLocation] = useState<string>("");
@@ -70,7 +70,7 @@ export default function SearchJob() {
   };
 
   return (
-  <div className="bg-white min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <div className="bg-white min-h-screen text-gray-900 transition-colors duration-300">
     <Header />
     <main className="py-6 px-4 mt-16 sm:px-8 md:px-20">
       <div className="flex items-center w-full justify-between mb-8">
@@ -84,7 +84,7 @@ export default function SearchJob() {
               <input
                 type="text"
                 placeholder="Search by: Job title, Position, Keyword..."
-                className="flex-grow ml-2 outline-none text-lg text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400"
+                className="flex-grow ml-2 outline-none text-lg text-gray-900 bg-transparent placeholder-gray-400"
                 value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
               />
@@ -98,7 +98,7 @@ export default function SearchJob() {
               <input 
               type="text" 
               placeholder="City, state or zip code" 
-              className="flex-grow ml-2 outline-none text-sm text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400" 
+              className="flex-grow ml-2 outline-none text-sm text-gray-900 bg-transparent placeholder-gray-400" 
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               />

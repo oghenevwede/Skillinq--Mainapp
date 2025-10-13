@@ -43,7 +43,7 @@ export default function AdminRegisterPage() {
       await finalizeAccountCreation();
       await router.replace('/dashboard')
       // Handle successful login (e.g., save token, redirect)
-    } catch (err) {
+    } catch (_err) {
       setError("Invalid credentials");
     }
   };
@@ -66,14 +66,22 @@ export default function AdminRegisterPage() {
             <label htmlFor="otp" className="mb-2 mt-6 block font-normal dark:text-black text-xs">OTP</label>
             <input
               type="password"
+              disabled={isLoading}
+              id="otp"
+              name="otp"
+              maxLength={6}
+              minLength={6}
               placeholder="****"
               className="dark:text-black mb-4 w-full max-w-xs p-2 border border-gray-400 rounded"
               value={OTP}
               onChange={e => setOTP(e.target.value)}
               required
             />
-            <button type="submit" className="w-full max-w-xs justify-center bg-blue-800 text-white py-2 rounded hover:bg-blue-700">
+            <button type="submit" 
+            disabled={isLoading}
+            className="w-full max-w-xs justify-center bg-blue-800 text-white py-2 rounded hover:bg-blue-700">
              Create your account
+              {isLoading && <span className="loader ml-2"></span>}
             </button>
           </div>
         </div>

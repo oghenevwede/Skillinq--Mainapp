@@ -338,12 +338,24 @@ const mockJobsData: Job[] = [
 ];
 
 
+// Extract unique values for filters
+const jobTypes = Array.from(new Set(mockJobsData.map(job => job.type)));
+const companies = Array.from(new Set(mockJobsData.map(job => job.company)));
+
 
 export default function FindJob() {
   const [location, setLocation] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [displayedJobs, setDisplayedJobs] = useState<Job[]>([]);
   const [recentSearch, setRecentSearch] = useState<{jobTitle: string, location: string, results: Job[]} | null>(null);
+    // For filters
+
+    const [filteredJobs, setFilteredJobs] = useState(mockJobsData);
+    const [showFilters, setShowFilters] = useState(false);
+    const [selectedType, setSelectedType] = useState('');
+    const [selectedCompany, setSelectedCompany] = useState('');
+
+  
   
   function shuffleJobs(jobs: Job[]) {
     return jobs
@@ -379,6 +391,21 @@ export default function FindJob() {
   const jobsToShow = recentSearch && recentSearch.results.length
   ? recentSearch.results
   : displayedJobs;
+
+
+  // Search and Filter Logic
+  const filterSearch = () => {
+    const filtered = mockJobsData.filter(
+    job =>
+    job.title.toLowerCase().includes(jobTitle.toLowerCase()) &&
+    job.location.toLowerCase().includes(location.toLowerCase()) &&
+    (selectedType ? job.type.toLowerCase() === selectedType.toLowerCase() : true) &&
+    (selectedCompany ? job.company === selectedCompany : true)
+    );
+    setFilteredJobs(filtered.length ? filtered : mockJobsData);
+    setShowFilters(false);
+  };
+
   
   return (
   <div className="bg-white min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -425,7 +452,9 @@ export default function FindJob() {
             
             {/* Buttons */}
             <div className="flex items-center w-full lg:w-1/4 space-x-2">
-              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-200 dark:bg-gray-100 text-gray-700 dark:text-gray-700 font-medium py-3 hover:bg-gray-400 dark:hover:bg-gray-200 transition-colors">
+              <button 
+              onClick={() => setShowFilters(true)}
+              className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-200 dark:bg-gray-100 text-gray-700 dark:text-gray-700 font-medium py-3 hover:bg-gray-400 dark:hover:bg-gray-200 transition-colors">
                 <FilterIcon className='size-6'/>
                 <span>Filters</span>
               </button>
@@ -436,6 +465,54 @@ export default function FindJob() {
               Find Job
             </button>
           </div>
+
+          {showFilters && (
+      <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
+          <h2 className="text-xl font-bold mb-4 text-black">Filter Jobs</h2>
+          <div className="mb-4">
+            <label className="block mb-1 font-medium text-black">Job Type</label>
+            <select
+            value={selectedType}
+            onChange={e => setSelectedType(e.target.value)}
+            className="w-full border border-gray-300 text-gray-700 rounded p-2"
+            >
+            <option value="">Any</option>
+            {jobTypes.map(type => (
+              <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1 font-medium text-black">Company</label>
+            <select
+            value={selectedCompany}
+            onChange={e => setSelectedCompany(e.target.value)}
+            className="w-full border border-gray-300 text-gray-700 rounded p-2"
+            >
+            <option value="">Any</option>
+            {companies.map(company => (
+              <option key={company} value={company}>{company}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex justify-end gap-2">
+            <button
+            onClick={() => setShowFilters(false)}
+            className="px-4 py-2 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
+            >
+            Cancel
+          </button>
+          <button
+          onClick={filterSearch}
+          className="px-4 py-2 rounded bg-blue-800 text-white hover:bg-blue-700"
+          >
+          Apply Filters
+        </button>
+      </div>
+    </div>
+  </div>
+  )}
         </div>
       </div>
     </div>
