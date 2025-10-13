@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import ApplicantRegisterPage from "../continue-registration/page";
 import { useRouter } from "next/navigation";
 
@@ -53,7 +54,7 @@ export default function AdminRegisterPage() {
         <div className="flex flex-col my-8 max-w-full items-center justify-center">
          <div className="flex flex-col items-center justify-center mx-10">
             <div className="flex items-center justify-between mx-10 mb-5">
-              <img src="/skillinq_logo.png" alt="Logo" className="h-8" />
+              <Image src="/skillinq_logo.png" alt="Logo" width={150} height={150} className="h-8" />
             </div>
 
             <h2 className="text-2xl dark:text-black font-bold mb-1 mx-4">Enter your OTP</h2>

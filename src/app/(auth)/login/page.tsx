@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -78,7 +78,7 @@ const router = useRouter();
         </button>
 
           <div className="align-center mt-4 flex justify-center">
-            <span className="text-xs dark:text-black font-normal mx-3">Don't have an account? <a href="/register" className="text-blue-800 hover:underline">Sign up</a></span>
+            <span className="text-xs dark:text-black font-normal mx-3">Don&apos;t have an account? <a href="/register" className="text-blue-800 hover:underline">Sign up</a></span>
           </div>
 
         </form>

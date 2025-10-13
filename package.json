@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev ",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint"
@@ -30,6 +30,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@reduxjs/toolkit": "^2.9.0",
     "@tanstack/react-table": "^8.21.3",
+    "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^0.544.0",
     "mobx": "^6.13.7",

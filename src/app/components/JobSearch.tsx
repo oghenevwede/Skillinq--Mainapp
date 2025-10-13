@@ -59,7 +59,7 @@ const JobSearch = () => {
       <div className="flex items-center w-full lg:w-1/4 space-x-2">
         <button
           onClick={() => dispatch(toggleFilters())}
-          className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 text-black font-medium py-3 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-200 text-black font-medium py-3 hover:bg-gray-400 dark:hover:bg-gray-600 transition-colors"
         >
           <FilterIcon className="size-6 stroke-2 stroke-gray-800" />
           <span>Filters</span>

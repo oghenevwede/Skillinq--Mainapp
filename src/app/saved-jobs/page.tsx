@@ -107,8 +107,8 @@ export default function SearchJob() {
             
             {/* Buttons */}
             <div className="flex items-center w-full lg:w-1/4 space-x-2">
-              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-100 text-gray-700 font-medium py-3 hover:bg-gray-200 transition-colors">
-                <FilterIcon />
+              <button className="flex-grow flex items-center justify-center w-2xl rounded bg-gray-200 text-gray-700 font-medium py-3 hover:bg-gray-300 transition-colors">
+                <FilterIcon className="size-6"/>
                 <span>Filters</span>
               </button>
               <button 

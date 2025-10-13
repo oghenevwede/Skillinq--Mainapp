@@ -52,7 +52,7 @@ export default function ApplicantRegisterPage() {
             </div>
 
             <h2 className="dark:text-black text-3xl font-semibold mb-1 mx-4">Continue to Skillinq</h2>
-            <span className="mb-2 dark:text-black text-md font-normal mx-9">Let's help you find your next role</span>
+            <span className="mb-2 dark:text-black text-md font-normal mx-9">Let&apos;s help you find your next role</span>
             {error && <div className="mb-4 text-red-500">{error}</div>} 
             
             <div className="flex flex-row items-center justify-center gap-8 w-2xl">

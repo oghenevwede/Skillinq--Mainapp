@@ -40,7 +40,7 @@ export default function AdminRegisterPage() {
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center">
             <h2 className="text-3xl dark:text-black font-semibold mb-1 mx-4">Continue to Skillinq</h2>
-            <span className="mb-6 text-md dark:text-black font-normal mx-9">Let's help you find your next role</span>
+            <span className="mb-6 text-md dark:text-black font-normal mx-9">Let&apos;s help you find your next role</span>
             {error && <div className="mb-4 text-red-500">{error}</div>}
           </div>
           
