@@ -392,9 +392,9 @@ export default function FindJob() {
 
   
   return (
-  <div className="bg-white min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <div className="bg-white min-h-screen overflow-x-hidden sm:max-w-full text-gray-900 dark:text-gray-100 transition-colors duration-300">
     <Header />
-    <div className="max-w-screen py-6 px-80 bg-gray-200 flex items-center justify-between">
+    <div className="w-full max-w-full py-6 px-6 lg:px-80 lg:bg-green-200 flex items-center justify-between sm:max-w-full sm:overflow-hidden md:max-w-full md:overflow-hidden">
       <h1 className="text-lg dark:text-black mb-2">Find Job</h1>
       <div className="text-sm text-gray-600 dark:text-black mb-2 space-x-2 gap-2">
         <Link href="/dashboard" className="">Home</Link>
