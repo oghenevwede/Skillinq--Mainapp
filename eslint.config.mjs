@@ -20,6 +20,19 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-];
-
+  // .eslintrc.json (or the rules section of your config)
+{
+  "rules": {
+    // This rule is defined differently for base ESLint vs. TypeScript ESLint
+    "no-unused-vars": "off", // Turn off the base rule
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // or "error"
+      {
+        "argsIgnorePattern": "^_", // Ignore arguments starting with underscore
+        "varsIgnorePattern": "^_",  // Ignore variables starting with underscore
+        "caughtErrorsIgnorePattern": "^_" // Specifically ignore catch errors starting with underscore
+      }
+    ]
+  }
+}];
 export default eslintConfig;

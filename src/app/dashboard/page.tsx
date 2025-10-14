@@ -147,7 +147,7 @@ export default function DashboardPage() {
       {/* DASHBOARD VIEW */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2 dark:text-black">
+          <h1 className="text-3xl font-semibold mb-2 dark:text-black">
             Welcome back, Andre Pinda
           </h1>
           <p className="text-gray-700 dark:text-gray-700">
@@ -167,7 +167,7 @@ export default function DashboardPage() {
       </div>
       
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl text-black font-bold">
+        <h2 className="text-2xl text-black font-semibold">
           Top Jobs for you this week
         </h2>
         <button

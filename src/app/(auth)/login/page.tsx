@@ -27,7 +27,7 @@ const router = useRouter();
       // if (!res.ok) throw new Error("Login failed");
       router.push ('./dashboard')
       // Handle successful login (e.g., save token, redirect)
-    } catch (err) {
+    } catch (_err) {
       setError("Invalid credentials");
     }
   };

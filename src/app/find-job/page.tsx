@@ -372,25 +372,9 @@ export default function FindJob() {
     }
   }, []);
   
-  const handleSearch = () => {
-    if (!jobTitle && !location) {
-      setDisplayedJobs(shuffleJobs(mockJobsData));
-      setRecentSearch(null);
-      return;
-    }
-    const filtered = mockJobsData.filter(job =>
-    job.title.toLowerCase().includes(jobTitle.toLowerCase()) &&
-    job.location.toLowerCase().includes(location.toLowerCase())
-    );
-    setDisplayedJobs(filtered.length ? filtered : shuffleJobs(mockJobsData));
-    const searchData = { jobTitle, location, results: filtered };
-    setRecentSearch(searchData);
-    localStorage.setItem('recentSearch', JSON.stringify(searchData));
-  };
-  
   const jobsToShow = recentSearch && recentSearch.results.length
   ? recentSearch.results
-  : displayedJobs;
+  : displayedJobs; 
 
 
   // Search and Filter Logic
@@ -460,7 +444,7 @@ export default function FindJob() {
               </button>
               <button 
               className="flex-grow bg-blue-800 w-sm text-white font-medium py-3 rounded-sm p-4 hover:bg-blue-700 transition-colors"
-              onClick={handleSearch}
+              onClick={filterSearch}
               >
               Find Job
             </button>
@@ -517,7 +501,7 @@ export default function FindJob() {
       </div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {jobsToShow.map((job, idx) => (
+      {filteredJobs.map((job, idx) => (
         <JobCard
         key={`${job.title}-${job.company}-${idx}`}
         type={job.type}

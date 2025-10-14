@@ -12,7 +12,7 @@ import FilterIcon from "../components/icons/FilterIcon";
 import Separator from "../components/Separator";
 
 // Define type for analytics data (though unused, kept for consistency)
-interface AnalyticsData {
+{/*interface AnalyticsData {
   title: string;
   value: string;
   change: string;
@@ -26,7 +26,7 @@ interface JobData {
   salary: string;
   company: string;
   location: string;
-}
+} */}
 
 // Mock data (analytics unused, jobs used)
 {/*const mockAnalyticsData: AnalyticsData[] = [
