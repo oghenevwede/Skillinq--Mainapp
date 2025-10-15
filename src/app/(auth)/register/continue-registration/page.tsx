@@ -45,7 +45,7 @@ export default function ApplicantRegisterPage() {
     
     return (
     <div className="flex items-center justify-center min-h-screen bg-white">
-        <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center bg-white p-8 mt-12 w-full rounded shadow-md">
+        <form onSubmit={handleSubmit} className="flex flex-col max-w-full items-center justify-center bg-white p-8 mt-12 w-full rounded shadow-md">
             
             <div className="flex items-center justify-between mx-10 mb-5">
                 <Image src="/skillinq_logo.png" width={200} height={200} alt="Logo" />
@@ -54,8 +54,8 @@ export default function ApplicantRegisterPage() {
             <h2 className="dark:text-black text-3xl font-semibold mb-1 mx-4">Continue to Skillinq</h2>
             <span className="mb-2 dark:text-black text-md font-normal mx-9">Let&apos;s help you find your next role</span>
             {error && <div className="mb-4 text-red-500">{error}</div>} 
-            
-            <div className="flex flex-row items-center justify-center gap-8 w-2xl">
+
+            <div className="flex flex-row max-w-full overflow-x-hidden items-center justify-center gap-8 w-2xl">
                 <div className="flex flex-col mb-2 gap-2 w-full">
                     <label htmlFor="firstName" className="mb-2 mt-6 block font-semibold dark:text-black text-sm">First Name</label>
                     <input

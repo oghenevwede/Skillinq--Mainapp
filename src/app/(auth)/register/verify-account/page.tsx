@@ -19,7 +19,7 @@ export default function AdminRegisterPage() {
         <div className="">
           <h1>Setup complete</h1>
         </div>; resolve();
-      }, 5000)
+      }, 3000)
     });
   };
 
