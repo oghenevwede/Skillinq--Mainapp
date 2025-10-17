@@ -10,347 +10,22 @@ import LocationIcon from '../components/icons/LocationIcon'
 import CrosshairIcon from '../components/icons/CrosshairIcon'
 import FilterIcon from '../components/icons/FilterIcon'
 import JobCard from '../components/JobCard';
-
-type Job = {
-  type: string;
-  title: string;
-  salary: string;
-  company: string;
-  location: string;
-};
-  
-const mockJobsData: Job[] = [
-  {
-    type: "Full-time",
-    title: "Frontend Developer",
-    salary: "$80,000 - $100,000",
-    company: "TechNova",
-    location: "Lagos",
-  },
-  {
-    type: "Part-time",
-    title: "UI/UX Designer",
-    salary: "$40,000 - $60,000",
-    company: "DesignHub",
-    location: "Abuja",
-  },
-  {
-    type: "Contract",
-    title: "Backend Engineer",
-    salary: "$90,000 - $120,000",
-    company: "CloudWorks",
-    location: "Remote",
-  },
-  {
-    type: "Internship",
-    title: "Data Analyst Intern",
-    salary: "$20,000 - $30,000",
-    company: "Insight Analytics",
-    location: "Port Harcourt",
-  },
-  {
-    type: "Full-time",
-    title: "Product Manager",
-    salary: "$110,000 - $140,000",
-    company: "InnovateX",
-    location: "Lagos",
-  },
-  {
-    type: "Contract",
-    title: "Mobile App Developer",
-    salary: "$70,000 - $90,000",
-    company: "Appify",
-    location: "Remote",
-  },
-  {
-    type: "Full-time",
-    title: "DevOps Engineer",
-    salary: "$100,000 - $130,000",
-    company: "ScaleOps",
-    location: "Abuja",
-  },
-  {
-    type: "Part-time",
-    title: "Content Writer",
-    salary: "$30,000 - $50,000",
-    company: "WriteRight",
-    location: "Ibadan",
-  },
-  {
-    type: "Internship",
-    title: "Marketing Intern",
-    salary: "$15,000 - $25,000",
-    company: "MarketMinds",
-    location: "Lagos",
-  },
-  {
-    type: "Full-time",
-    title: "QA Tester",
-    salary: "$60,000 - $80,000",
-    company: "QualityFirst",
-    location: "Remote",
-  },
-  {
-    type: "Full-time",
-    title: "Machine Learning Engineer",
-    salary: "$120,000 - $150,000",
-    company: "AI Nexus",
-    location: "Remote",
-  },
-  {
-    type: "Contract",
-    title: "Technical Writer",
-    salary: "$50,000 - $70,000",
-    company: "DocuTech",
-    location: "Abuja",
-  },
-  {
-    type: "Internship",
-    title: "Frontend Developer Intern",
-    salary: "$10,000 - $20,000",
-    company: "BrightCode",
-    location: "Lagos",
-  },
-  {
-    type: "Full-time",
-    title: "Cybersecurity Analyst",
-    salary: "$90,000 - $120,000",
-    company: "SecureNet",
-    location: "Port Harcourt",
-  },
-  {
-    type: "Part-time",
-    title: "SEO Specialist",
-    salary: "$40,000 - $60,000",
-    company: "RankUp Digital",
-    location: "Remote",
-  },
-  {
-    type: "Full-time",
-    title: "Blockchain Developer",
-    salary: "$130,000 - $160,000",
-    company: "ChainLinker",
-    location: "Lagos",
-  },
-  {
-    type: "Contract",
-    title: "Game Developer",
-    salary: "$80,000 - $100,000",
-    company: "PixelForge",
-    location: "Remote",
-  },
-  {
-    type: "Internship",
-    title: "Graphic Design Intern",
-    salary: "$12,000 - $18,000",
-    company: "CreativeLab",
-    location: "Abuja",
-  },
-  {
-    type: "Full-time",
-    title: "Cloud Architect",
-    salary: "$140,000 - $180,000",
-    company: "SkyScale",
-    location: "Remote",
-  },
-  {
-    type: "Part-time",
-    title: "Video Editor",
-    salary: "$35,000 - $55,000",
-    company: "CineCraft",
-    location: "Lagos",
-  },
-  {
-    type: "Full-time",
-    title: "AI Research Scientist",
-    salary: "$150,000 - $190,000",
-    company: "DeepVision Labs",
-    location: "Remote",
-  },
-  {
-    type: "Contract",
-    title: "IT Support Specialist",
-    salary: "$50,000 - $70,000",
-    company: "HelpDeskPro",
-    location: "Ibadan",
-  },
-  {
-    type: "Internship",
-    title: "Social Media Intern",
-    salary: "$10,000 - $15,000",
-    company: "BuzzWorks",
-    location: "Port Harcourt",
-  },
-  {
-    type: "Full-time",
-    title: "Systems Administrator",
-    salary: "$85,000 - $110,000",
-    company: "CoreTech",
-    location: "Lagos",
-  },
-  {
-    type: "Part-time",
-    title: "Customer Support Agent",
-    salary: "$25,000 - $40,000",
-    company: "Supportly",
-    location: "Remote",
-  },
-  {
-    type: "Contract",
-    title: "Data Engineer",
-    salary: "$100,000 - $130,000",
-    company: "DataStream",
-    location: "Abuja",
-  },
-  {
-    type: "Full-time",
-    title: "Project Coordinator",
-    salary: "$60,000 - $85,000",
-    company: "BuildSync",
-    location: "Ibadan",
-  },
-  {
-    type: "Internship",
-    title: "HR Assistant Intern",
-    salary: "$12,000 - $16,000",
-    company: "PeopleFirst",
-    location: "Lagos",
-  },
-  {
-    type: "Part-time",
-    title: "Copywriter",
-    salary: "$35,000 - $55,000",
-    company: "AdVerse",
-    location: "Remote",
-  },
-  {
-    type: "Full-time",
-    title: "Full Stack Developer",
-    salary: "$100,000 - $140,000",
-    company: "CodeCrafters",
-    location: "Abuja",
-  },
-  {
-    type: "Full-time",
-    title: "Frontend Developer",
-    salary: "$85,000 - $110,000",
-    company: "NextWave Tech",
-    location: "Abuja",
-  },
-  {
-    type: "Contract",
-    title: "Backend Engineer",
-    salary: "$95,000 - $125,000",
-    company: "DataForge",
-    location: "Remote",
-  },
-  {
-    type: "Internship",
-    title: "Marketing Intern",
-    salary: "$18,000 - $22,000",
-    company: "BrandLoop",
-    location: "Lagos",
-  },
-  {
-    type: "Part-time",
-    title: "Content Writer",
-    salary: "$32,000 - $45,000",
-    company: "StorySync",
-    location: "Ibadan",
-  },
-  {
-    type: "Full-time",
-    title: "UI/UX Designer",
-    salary: "$65,000 - $85,000",
-    company: "Visionary Designs",
-    location: "Remote",
-  },
-  {
-    type: "Contract",
-    title: "Mobile App Developer",
-    salary: "$75,000 - $95,000",
-    company: "TapWorks",
-    location: "Port Harcourt",
-  },
-  {
-    type: "Full-time",
-    title: "DevOps Engineer",
-    salary: "$110,000 - $135,000",
-    company: "CloudScale Systems",
-    location: "Lagos",
-  },
-  {
-    type: "Internship",
-    title: "Data Analyst Intern",
-    salary: "$16,000 - $24,000",
-    company: "DataMinds",
-    location: "Abuja",
-  },
-  {
-    type: "Full-time",
-    title: "QA Tester",
-    salary: "$70,000 - $90,000",
-    company: "BugHunt Labs",
-    location: "Remote",
-  },
-  {
-    type: "Part-time",
-    title: "Video Editor",
-    salary: "$30,000 - $50,000",
-    company: "ClipForge",
-    location: "Lagos",
-  },
-  {
-    type: "Contract",
-    title: "Cybersecurity Analyst",
-    salary: "$100,000 - $130,000",
-    company: "ShieldTech",
-    location: "Remote",
-  },
-  {
-    type: "Full-time",
-    title: "Product Manager",
-    salary: "$115,000 - $145,000",
-    company: "StratEdge",
-    location: "Abuja",
-  },
-  {
-    type: "Part-time",
-    title: "SEO Specialist",
-    salary: "$38,000 - $55,000",
-    company: "Boostify",
-    location: "Ibadan",
-  },
-  {
-    type: "Full-time",
-    title: "Full Stack Developer",
-    salary: "$105,000 - $145,000",
-    company: "DevStudio",
-    location: "Remote",
-  },
-  {
-    type: "Internship",
-    title: "Graphic Design Intern",
-    salary: "$14,000 - $19,000",
-    company: "PixelWorks",
-    location: "Port Harcourt",
-  },
-];
+import { Job, jobsData } from '../data/jobs';
 
 
 // Extract unique values for filters
-const jobTypes = Array.from(new Set(mockJobsData.map(job => job.type)));
-const companies = Array.from(new Set(mockJobsData.map(job => job.company)));
+const jobTypes = Array.from(new Set(jobsData.map(job => job.type)));
+const companies = Array.from(new Set(jobsData.map(job => job.company)));
 
 
 export default function FindJob() {
   const [location, setLocation] = useState("");
   const [jobTitle, setJobTitle] = useState("");
-  const [displayedJobs, setDisplayedJobs] = useState<Job[]>([]);
-  const [recentSearch, setRecentSearch] = useState<{jobTitle: string, location: string, results: Job[]} | null>(null);
+  const [_displayedJobs, setDisplayedJobs] = useState<Job[]>([]);
+  const [_recentSearch, setRecentSearch] = useState<{jobTitle: string, location: string, results: Job[]} | null>(null);
     // For filters
 
-    const [filteredJobs, setFilteredJobs] = useState(mockJobsData);
+    const [filteredJobs, setFilteredJobs] = useState(jobsData);
     const [showFilters, setShowFilters] = useState(false);
     const [selectedType, setSelectedType] = useState('');
     const [selectedCompany, setSelectedCompany] = useState('');
@@ -365,28 +40,26 @@ export default function FindJob() {
   }
   
   useEffect(() => {
-    setDisplayedJobs(shuffleJobs(mockJobsData));
+    setDisplayedJobs(shuffleJobs(jobsData).slice(0, 6));
     const savedSearch = localStorage.getItem('recentSearch');
     if (savedSearch) {
       setRecentSearch(JSON.parse(savedSearch));
     }
   }, []);
   
-  const jobsToShow = recentSearch && recentSearch.results.length
-  ? recentSearch.results
-  : displayedJobs; 
+  // const jobsToShow = recentSearch && recentSearch.results.length ? recentSearch.results : displayedJobs;
 
 
   // Search and Filter Logic
   const filterSearch = () => {
-    const filtered = mockJobsData.filter(
+    const filtered = jobsData.filter(
     job =>
     job.title.toLowerCase().includes(jobTitle.toLowerCase()) &&
-    job.location.toLowerCase().includes(location.toLowerCase()) &&
+    job.jobLocation.toLowerCase().includes(location.toLowerCase()) &&
     (selectedType ? job.type.toLowerCase() === selectedType.toLowerCase() : true) &&
     (selectedCompany ? job.company === selectedCompany : true)
     );
-    setFilteredJobs(filtered.length ? filtered : mockJobsData);
+    setFilteredJobs(filtered.length ? filtered : jobsData);
     setShowFilters(false);
   };
 
@@ -501,15 +174,8 @@ export default function FindJob() {
       </div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredJobs.map((job, idx) => (
-        <JobCard
-        key={`${job.title}-${job.company}-${idx}`}
-        type={job.type}
-        title={job.title}
-        salary={job.salary}
-        company={job.company}
-        location={job.location}
-        />
+      {filteredJobs.map((job) => (
+        <JobCard key={job.id} {...job} />
         ))}
       </div>
     </main>

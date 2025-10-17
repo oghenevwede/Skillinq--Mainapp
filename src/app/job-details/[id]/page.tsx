@@ -4,8 +4,10 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
-import { setSelectedJob, setApplicationStep } from "@/store/slices/jobSlice";
-import ArrowRightIcon from "../../components/icons/ArrowRightIcon";
+import { setSelectedJob, setApplicationStep, clearSelectedJob } from "@/store/slices/jobSlice";
+import { jobsData } from "@/app/data/jobs";
+
+  import ArrowRightIcon from "../../components/icons/ArrowRightIcon";
 import MailIcon from "../../components/icons/MailIcon";
 import LinkIcon from "../../components/icons/LinkIcon";
 import LinkedInIcon from "../../components/icons/LinkedInIcon";
@@ -20,60 +22,30 @@ import JobModal from "../../components/JobModal";
 import { useParams } from "next/navigation";
 import { MapIcon } from "@heroicons/react/24/outline";
 
-// Define the Job interface
-interface Job {
-  id: string;
-  title: string;
-  company: string;
-  type: string;
-  category: string;
-  salary: string;
-  jobLevel: string;
-  experience: string;
-  education: string;
-  postedDate: string;
-  expiryDate: string;
-  description: string[];
-  requirements: string[];
-}
+// Job type is available in data but not required in this file
 
-export default function JobDetailsPage() {
+export default function JobDetailsPage(_props: unknown) {
   const dispatch = useDispatch<AppDispatch>();
-  const { selectedJob } = useSelector((state: RootState) => state.job);
+  const selectedJob = useSelector((state: RootState) => state.job.selectedJob);
   const { id } = useParams() || {}; // Handle undefined params during initial render
 
   useEffect(() => {
     // Guard against undefined id
     if (!id) return;
 
-    // Hardcoded job data (since no route.ts exists)
-    const jobData: Job = {
-      id: id as string,
-      title: "Senior UX Designer",
-      company: "Facebook",
-      type: "FULL-TIME",
-      category: "Design",
-      salary: "$100,000 - $120,000",
-      jobLevel: "Entry Level",
-      experience: "3+ years",
-      education: "Graduation",
-      postedDate: "14 Jun, 2024",
-      expiryDate: "14 Oct, 2025", // Updated to a future date
-      description: [
-        "Velstar is a Shopify Plus agency, and we partner with brands to help them grow, we also do the same with our people!",
-        "Here at Velstar, we don't just make websites, we create exceptional digital experiences that consumers love. Our team of designers, developers, strategists, and creators work together to push brands to the next level. From Platform Migrations, User Experience & User Interface Design, to Digital Marketing, we have a proven track record in delivering outstanding eCommerce solutions and driving sales for our clients.",
-        "The role will involve translating project specifications into clean, test-driven, easily maintainable code. You will work with the Project and Development teams as well as with the Technical Director, adhering closely to project plans and delivering work that meets functional & non-functional requirements. You will have the opportunity to create new, innovative, secure and scalable features for our clients on the Shopify platform.",
-        "Want to work with us? You're in good company!",
-      ],
-      requirements: [
-        "Great troubleshooting and analytical skills combined with the desire to tackle challenges head-on",
-        "3+ years of experience in back-end development working either with multiple smaller projects simultaneously or large-scale applications",
-        "Experience with HTML, JavaScript, CSS, PHP, Symphony and/or Laravel",
-        "Working regularly with APIs and Web Services (REST, GraphQL, SOAP, etc)",
-        "Have experience/awareness in Agile application development, commercial off-the-shelf software, middleware, servers and storage, and database management.",
-      ],
-    };
-    dispatch(setSelectedJob(jobData));
+    // Fetch job data from data/jobs.ts
+    // jobsData uses string ids like "job-1" — match by string first, then try numeric fallbacks
+    const jobData = jobsData.find((job) =>
+      String(job.id) === String(id) || // exact string match (e.g. "job-1")
+      job.id === `job-${id}` || // allow id params like "1" to match "job-1"
+      (!Number.isNaN(Number(job.id)) && Number(job.id) === Number(id)) // numeric match if possible
+    );
+    if (jobData) {
+      dispatch(setSelectedJob(jobData));
+    } else {
+      // clear any previously selected job so the UI can render a not-found message
+      dispatch(clearSelectedJob());
+    }
   }, [dispatch, id]);
 
   const handleApply = () => {
@@ -92,7 +64,7 @@ export default function JobDetailsPage() {
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-20">
           <div className="flex items-center mb-4 lg:mb-0">
             <div className="">
-              <Image src="/globe.svg" width={50} height={50} alt="logo" className="mr-4" />
+              <Image src={`/${selectedJob?.logo ?? 'globe.svg'}`} width={64} height={64} alt="logo" className="mr-4 rounded-full" />
             </div>
             <div>
               <h1 className="text-2xl font-semibold">{selectedJob.title}</h1>

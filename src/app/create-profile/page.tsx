@@ -80,6 +80,7 @@ const CreateProfilePage: React.FC = () => {
     avatar: profile.avatar || null,
   });
   const [avatarPreview, setAvatarPreview] = useState<string | null>(profile.avatar || null);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState<string[]>(form.skills);
   const [selectedCompanySizes, setSelectedCompanySizes] = useState<string[]>(form.companySizes);
   const [resumePreview, setResumePreview] = useState<string | null>(null);
@@ -173,7 +174,7 @@ const CreateProfilePage: React.FC = () => {
                 </div>
                 <div className="flex items-start space-x-6">
                   <div className="relative">
-                    <div className="w-32 h-32 rounded-full flex items-center justify-center bg-gray-50">
+                    <div className="w-32 h-32 rounded-full flex items-center justify-center bg-gray-50 cursor-pointer" onClick={() => avatarPreview && setShowAvatarModal(true)}>
                       {avatarPreview ? (
                         <Image
                           src={avatarPreview}
@@ -201,6 +202,14 @@ const CreateProfilePage: React.FC = () => {
                         </div>
                       )}
                     </div>
+                    {/* Hidden file input used by Edit button in modal */}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleFileChange(e, 'avatar')}
+                      className="hidden"
+                      id="avatar-upload-modal"
+                    />
                   </div>
                   <div className="flex flex-col items-center justify-center space-y-2 border-2 border-gray-600 border-dashed w-xs p-8">
                     <input
@@ -220,6 +229,28 @@ const CreateProfilePage: React.FC = () => {
                     <span>or drag and drop</span>
                     <p className="text-sm text-gray-500">SVG, PNG, JPG or GIF (max. 400x400)</p>
                   </div>
+                  {/* Avatar modal */}
+                  {showAvatarModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                      <div className="bg-white rounded-lg p-6 max-w-md w-full">
+                        <div className="flex justify-between items-start">
+                          <h3 className="text-lg font-medium">Profile Photo</h3>
+                          <button onClick={() => setShowAvatarModal(false)} className="text-gray-500">Close</button>
+                        </div>
+                        <div className="flex flex-col items-center mt-4">
+                          {avatarPreview ? (
+                            <Image src={avatarPreview} alt="Avatar Large" width={240} height={240} className="rounded-full object-cover" />
+                          ) : (
+                            <div className="w-56 h-56 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">No photo</div>
+                          )}
+                          <div className="mt-4 flex space-x-3">
+                            <label htmlFor="avatar-upload-modal" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md cursor-pointer">Edit</label>
+                            <button className="px-4 py-2 border rounded-md" onClick={() => { setShowAvatarModal(false); }}>Done</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

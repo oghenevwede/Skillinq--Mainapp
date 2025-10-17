@@ -10,6 +10,13 @@ module.exports = {
   darkMode: 'class', // <--- Add this line
   theme: {
     extend: {
+      colors: {
+        jobCardBlue: '#E3F2FD',
+        jobCardPurple: '#EFE5FF',
+        primaryPurple: '#7C3AED',
+        primaryPurpleDark: '#5B21B6',
+        theblue: color => color('#1E40AF'),
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       }

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Header } from '../components/Header';
+// Link not used in this file
 import AnalyticsCard from '../components/AnalyticsCard';
 import JobCard from '../components/JobCard';
 import { PlusIcon } from '../components/icons/PlusIcon';
@@ -10,108 +11,43 @@ import LocationIcon from '../components/icons/LocationIcon';
 import CrosshairIcon from '../components/icons/CrosshairIcon';
 import FilterIcon from '../components/icons/FilterIcon';
 import Separator from '../components/Separator';
+import { jobsData } from '../data/jobs';
+const mockJobsData = jobsData;
 
-// --- UNIFIED MOCK DATA ---
-const mockJobsData = [
-// Dashboard Jobs
-{
-  type: "FULL-TIME",
-  title: "Technical Support Specialist",
-  salary: "Salary: $20,000 - $25,000",
-  company: "Google Inc.",
-  location: "Dhaka, Bangladesh",
-},
-{
-  type: "FULL-TIME",
-  title: "Senior UX Designer",
-  salary: "Salary: $25,000 - $30,000",
-  company: "Amazon Web Services",
-  location: "Lagos, Nigeria",
-},
-{
-  type: "INTERNSHIP",
-  title: "Marketing Officer",
-  salary: "Salary: $15,000 - $20,000",
-  company: "Meta Africa",
-  location: "Abuja, Nigeria",
-},
 
-// Search Jobs
-{
-  type: "Full-time",
-  title: "Frontend Developer",
-  salary: "$80,000 - $100,000",
-  company: "TechNova",
-  location: "Lagos",
-},
-{
-  type: "Part-time",
-  title: "UI/UX Designer",
-  salary: "$40,000 - $60,000",
-  company: "DesignHub",
-  location: "Abuja",
-},
-{
-  type: "Contract",
-  title: "Backend Engineer",
-  salary: "$90,000 - $120,000",
-  company: "CloudWorks",
-  location: "Remote",
-},
-{
-  type: "Internship",
-  title: "Data Analyst Intern",
-  salary: "$20,000 - $30,000",
-  company: "Insight Analytics",
-  location: "Port Harcourt",
-},
-{
-  type: "Full-time",
-  title: "Product Manager",
-  salary: "$110,000 - $140,000",
-  company: "InnovateX",
-  location: "Lagos",
-},
-{
-  type: "Contract",
-  title: "Mobile App Developer",
-  salary: "$70,000 - $90,000",
-  company: "Appify",
-  location: "Remote",
-},
-{
-  type: "Full-time",
-  title: "DevOps Engineer",
-  salary: "$100,000 - $130,000",
-  company: "ScaleOps",
-  location: "Abuja",
-},
-{
-  type: "Part-time",
-  title: "Content Writer",
-  salary: "$30,000 - $50,000",
-  company: "WriteRight",
-  location: "Ibadan",
-},
-{
-  type: "Internship",
-  title: "Marketing Intern",
-  salary: "$15,000 - $25,000",
-  company: "MarketMinds",
-  location: "Lagos",
-},
-{
-  type: "Full-time",
-  title: "QA Tester",
-  salary: "$60,000 - $80,000",
-  company: "QualityFirst",
-  location: "Remote",
-},
-];
 
 // Extract unique values for filters
 const jobTypes = Array.from(new Set(mockJobsData.map(job => job.type)));
 const companies = Array.from(new Set(mockJobsData.map(job => job.company)));
+
+const analyticsData = [
+  { name: "Mon", value: 20 },
+  { name: "Tue", value: 35 },
+  { name: "Wed", value: 30 },
+  { name: "Thu", value: 50 },
+  { name: "Fri", value: 45 },
+  { name: "Sat", value: 70 },
+  { name: "Sun", value: 90 },
+];
+const analyticsData2 = [
+  { name: "Mon", value: 20 },
+  { name: "Tue", value: 35 },
+  { name: "Wed", value: 30 },
+  { name: "Thu", value: 50 },
+  { name: "Fri", value: 45 },
+  { name: "Sat", value: 70 },
+  { name: "Sun", value: 90 },
+];
+const analyticsData3 = [
+  { name: "Mon", value: 80 },
+  { name: "Tue", value: 75 },
+  { name: "Wed", value: 50 },
+  { name: "Thu", value: 40 },
+  { name: "Fri", value: 35 },
+  { name: "Sat", value: 20 },
+  { name: "Sun", value: 50 },
+];
+
 
 export default function DashboardPage() {
   const [view, setView] = useState<'dashboard' | 'jobs'>('dashboard');
@@ -129,7 +65,7 @@ export default function DashboardPage() {
     const filtered = mockJobsData.filter(
     job =>
     job.title.toLowerCase().includes(jobTitle.toLowerCase()) &&
-    job.location.toLowerCase().includes(location.toLowerCase()) &&
+    job.jobLocation.toLowerCase().includes(location.toLowerCase()) &&
     (selectedType ? job.type.toLowerCase() === selectedType.toLowerCase() : true) &&
     (selectedCompany ? job.company === selectedCompany : true)
     );
@@ -161,9 +97,9 @@ export default function DashboardPage() {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        <AnalyticsCard title="Total Jobs Applied" value="2,420" change="40%" trend="up" color="green" />
-        <AnalyticsCard title="Total Jobs Accepted" value="1,210" change="10%" trend="down" color="red" />
-        <AnalyticsCard title="Total Jobs Rejected" value="316" change="20%" trend="up" color="green" />
+        <AnalyticsCard className="max-w-full flex-1" title="Total Jobs Applied" value="2,420" change="40%" trend="up" color="green" data={analyticsData} />
+        <AnalyticsCard className="max-w-full flex-1" title="Total Jobs Accepted" value="1,210" change="10%" trend="down" color="red" data={analyticsData3} />
+        <AnalyticsCard className="max-w-full flex-1" title="Total Jobs Rejected" value="316" change="20%" trend="up" color="green" data={analyticsData2} />
       </div>
       
       <div className="flex items-center justify-between mb-6">
@@ -177,13 +113,13 @@ export default function DashboardPage() {
         View all Jobs
       </button>
     </div>
-    
+    {/* 'Let the job card link to the job-details page when clicked' */} 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {mockJobsData.slice(0, 6).map((job, index) => (
-        <JobCard key={index} {...job} />
-        ))}
-      </div>
-      </>
+  {jobsData.slice(0, 6).map((job, _index) => (
+  <JobCard key={job.id} {...job} />
+  ))}
+    </div>
+        </>
       ) : (
       <>
       {/* SEARCH JOBS VIEW */}
@@ -290,10 +226,12 @@ export default function DashboardPage() {
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {filteredJobs.map((job, idx) => (
       <JobCard
-      key={`${job.title}-${job.company}-${idx}`}
-      {...job}
+        key={`${job.title}-${job.company}-${idx}`}
+        {...job}
+        id={job.id}
+        jobLocation={job.jobLocation}
       />
-      ))}
+    ))}
     </div>
     </>
     )}

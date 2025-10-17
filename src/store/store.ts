@@ -1,24 +1,27 @@
-import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from './slices/themeSlice'
-import profileReducer from "./slices/profileSlice"
-import dashboardReducer from "./slices/dashboardSlice";
-import jobSearchReducer from "./slices/jobSearchSlice"; // from your search-job page
-import authReducer from "./slices/authSlice";
-import jobReducer from "./slices/jobSlice";
-import jobsReducer from '@/store/slices/jobsSlice'
-//import { profile } from "console";
+  import { configureStore } from "@reduxjs/toolkit";
+  import themeReducer from './slices/themeSlice'
+  import profileReducer from "./slices/profileSlice"
+  import dashboardReducer from "./slices/dashboardSlice";   
+  import jobSearchReducer from "./slices/jobSearchSlice"; // from your search-job page
+  import authReducer from "./slices/authSlice";
+  import jobReducer from "./slices/jobSlice";
+  import jobsReducer from './slices/jobsSlice'
+  import applicationsReducer from "./slices/applicationsSlice";
 
-export const store = configureStore({
-  reducer: {
-    profile: profileReducer,
-    dashboard: dashboardReducer,
-    jobSearch: jobSearchReducer,
-    theme: themeReducer,
-    auth: authReducer,
-    job: jobReducer,
-    jobs: jobsReducer,
-  },
-});
+  //import { profile } from "console";
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+  export const store = configureStore({
+    reducer: {
+      profile: profileReducer,
+      dashboard: dashboardReducer,
+      jobSearch: jobSearchReducer,
+      theme: themeReducer,
+      auth: authReducer,
+      job: jobReducer,
+      jobs: jobsReducer,
+      applications: applicationsReducer,
+    },
+  });
+
+  export type RootState = ReturnType<typeof store.getState>;
+  export type AppDispatch = typeof store.dispatch;

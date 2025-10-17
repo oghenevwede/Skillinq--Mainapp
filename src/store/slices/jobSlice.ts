@@ -1,20 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface Job {
-  id: string;
-  title: string;
-  company: string;
-  type: string;
-  category: string;
-  salary: string;
-  jobLevel: string;
-  experience: string;
-  education: string;
-  postedDate: string;
-  expiryDate: string;
-  description: string[];
-  requirements: string[];
-}
+import { Job } from "@/app/data/jobs";
 
 interface JobState {
   selectedJob: Job | null;
@@ -41,6 +26,6 @@ const jobSlice = createSlice({
     },
   },
 });
-
-export const { setApplicationStep, setSelectedJob, clearSelectedJob, } = jobSlice.actions;
+  
+export const { setApplicationStep, setSelectedJob, clearSelectedJob } = jobSlice.actions;
 export default jobSlice.reducer;

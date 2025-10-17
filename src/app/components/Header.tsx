@@ -1,14 +1,18 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import SearchIcon from './icons/SearchIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import NotificationIcon from './icons/NotificationIcon';
+import { RootState } from '@/store/store';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const profile = useSelector((state: RootState) => state.profile);
+  const avatarSrc = profile?.avatar || '/skillinq_logo.png';
 
   return (
     <header className="sticky top-0 left-0 z-10 flex items-center justify-between w-full py-4 px-10 bg-white border-b border-gray-300">
@@ -64,6 +68,10 @@ const Header = () => {
         <span className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
           <NotificationIcon />
         </span>
+        {/* Profile avatar */}
+        <Link href="/create-profile" aria-label="Open profile" className="flex items-center justify-center w-9 h-9 rounded-full overflow-hidden border border-gray-200 hover:shadow-sm transition-shadow">
+          <Image src={avatarSrc} alt="Profile" width={36} height={36} />
+        </Link>
       </div>
 
       {/* Mobile Dropdown Menu */}
