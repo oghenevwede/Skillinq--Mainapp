@@ -629,7 +629,7 @@ const rawJobs: JobBase[] = [
     category: "Operations",
     salary: "$60,000 - $90,000",
     jobLevel: "Mid-level",
-    experience: "2+ years",
+    experience: "3+ years",
     education: "Bachelor's Degree in Supply Chain Management or equivalent",
     postedDate: "2025-10-26",
     expiryDate: "2025-11-26",
