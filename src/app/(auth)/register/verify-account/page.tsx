@@ -11,17 +11,6 @@ export default function AdminRegisterPage() {
 
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
-  
-
-  const finalizeAccountCreation = (): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        <div className="">
-          <h1>Setup complete</h1>
-        </div>; resolve();
-      }, 3000)
-    });
-  };
 
 
 
@@ -39,9 +28,7 @@ export default function AdminRegisterPage() {
       });*/ 
       //if (!res.ok) throw new Error("Login failed");
       //router.push ('/almost-done')
-      await router.push ('/almost-done');
-      await finalizeAccountCreation();
-      await router.replace('/dashboard')
+      await router.push ('/welcome');
       // Handle successful login (e.g., save token, redirect)
     } catch (_err) {
       setError("Invalid credentials");

@@ -2,14 +2,19 @@
 import React from 'react'
 
 interface ButtonsProps {
-    title: string;
+  title: string;
+  onClick?: () => void;
 }
 
-const Buttons = ({title}: ButtonsProps) => {
+const Buttons: React.FC<ButtonsProps> = ({ title, onClick }) => {
   return (
-    <div className="bg-blue-800 text-white py-2 px-8 w-fit border rounded">
-        {title}
-    </div>
+    <button
+      type="button"
+      onClick={onClick}
+      className="bg-blue-800 text-white py-2 px-8 w-fit border rounded"
+    >
+      {title}
+    </button>
   )
 }
 

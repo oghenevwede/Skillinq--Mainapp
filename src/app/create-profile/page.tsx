@@ -1,7 +1,8 @@
-'use client';
+"use client"
 
 import { useState, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setProfileData } from '@/store/slices/profileSlice';
 import Image from 'next/image';
@@ -48,6 +49,8 @@ const educationOptions = ['High School', 'Bachelor\'s Degree', 'Master\'s Degree
 const genderOptions = ['Male', 'Female', 'Non-binary', 'Prefer not to say'];
 
 const CreateProfilePage: React.FC = () => {
+  
+  const router = useRouter();
   const dispatch = useDispatch();
   const profile = useSelector((state: RootState) => state.profile);
   const [form, setForm] = useState<ProfileForm>({
@@ -123,6 +126,18 @@ const CreateProfilePage: React.FC = () => {
     setForm((prev) => ({ ...prev, dob: e.target.value }));
   };
 
+  const finalizeAccountCreation = (): Promise<void> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        <div className="">
+          <h1>Setup complete</h1>
+        </div>; resolve();
+      }, 3000)
+    });
+  };
+
+
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     let resumeBase64: string | null = null;
@@ -136,7 +151,9 @@ const CreateProfilePage: React.FC = () => {
           skills: selectedSkills,
           companySizes: selectedCompanySizes,
         }));
-        alert('Profile submitted successfully!');
+        router.push('/almost-done')
+        finalizeAccountCreation()
+        router.replace('/dashboard')  
       };
       reader.readAsDataURL(form.resume);
     } else {
@@ -146,7 +163,9 @@ const CreateProfilePage: React.FC = () => {
         skills: selectedSkills,
         companySizes: selectedCompanySizes,
       }));
-      alert('Profile submitted successfully!');
+        await router.push('/almost-done')
+        await finalizeAccountCreation()
+        await router.replace('/dashboard')
     }
   };
 
